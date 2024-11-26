@@ -1,0 +1,14 @@
+header {
+    padding: 40px 20px;
+    background-color: white;
+}
+
+header h1 {
+    color: var(--headline-font-color);
+}
+
+header .sub-title {
+    color: var(--nonstandard-text-font-color);
+    margin: 20px 0 0 0;
+    line-height: 24px;
+}

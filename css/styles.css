@@ -1,0 +1,21 @@
+@import url("colors.css");
+
+@import url("nav-styles.css");
+@import url("header-styles.css");
+@import url("footer-styles.css");
+@import url("kontakt.css");
+@import url("main-styles.css");
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: sans-serif;
+    min-height: 100%;
+    color: black;
+}
+
+

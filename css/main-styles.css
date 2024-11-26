@@ -1,0 +1,60 @@
+main {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 20px;
+    padding: 0px 20px 0px 20px;
+}
+
+.menue-ueberschrift {
+    color: var(--headline-font-color);
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.seitenmenue {
+    border-right: thin solid lightgray;
+    padding-right: 20px;
+}
+
+.seitenmenue a {
+    display: block;
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+}
+
+.seitenmenue a:hover {
+    color: var(--headline-font-color);
+    text-decoration: underline;
+}
+
+.aufgabe {
+    max-width: 300px;
+    min-width: 100%;
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    column-gap: 20px;
+    padding: 10px;
+}
+
+.aufgabe:hover {
+    background-color: lightgray;
+    border-radius: 8px;
+    transition: ease-in 0.2s;
+}
+
+.aufgabe .aufgabe-bild img{
+    width: 80px;
+    display: block;
+    align-self: center;
+}
+
+.aufgabe .aufgabe-text {
+    color: black;
+}
+
+.aufgabe .aufgabe-text .aufgabe-name {
+    color: var(--headline-font-color);
+    font-weight: bold;
+}

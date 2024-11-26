@@ -1,0 +1,27 @@
+footer {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    column-gap: 30px;
+    color: white;
+    background-color: var(--footer-bg-color);
+    width: 100%;
+    padding: 10px;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+}
+
+footer .haushaltsplaner {
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+footer a {
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    color: white;
+    padding: 0 30px;
+}
