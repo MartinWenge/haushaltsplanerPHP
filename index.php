@@ -1,5 +1,5 @@
+<?php require "php/functions.php" ?>
 <DOCTYPE html>
-
 <html lang="de">
 
 <head>
@@ -16,49 +16,50 @@
     <main>
         <div class="seitenmenue">
             <div class="menue-ueberschrift">Kathegorien</div>
-            <a href="kueche">Küche</a>
-            <a href="bad">Bad</a>
-            <a href="waesche">Wäsche</a>
+            <?php $kathegorien = getKathegorien() ?>
+            <?php 
+                foreach($kathegorien as $kathegorie){
+                    ?>
+                        <a href="kathegorie.php?cathegory=<?php echo urlencode($kathegorie['kathegorie']) ?>"><?php echo $kathegorie['kathegorie'] ?></a>
+                    <?php
+                }
+            ?>
         </div>
 
         <div class="inhaltsbereich">
-            <div class="menue-ueberschrift">Details</div>
-            <div class="aufgabe">
-                <div class="aufgabe-bild">
-                    <img src="figures/aufgabe_waescheWaschen_640.jpg" alt="figures/aufgabe_altImg_640.jpg">
-                </div>
-                <div class="aufgabe-text">
-                    <div class="aufgabe-name">Wäsche waschen</div>
-                    <p>Häufigkeit: alle zwei Tage</p>
-                    <p>Aufwand: 15 min</p>
-                    <p>Beschreibung: Wäsche sortieren, Waschmaschine befüllen, Waschmittel rein und starten</p>
-                    <p>Score: 10</p>
-                </div>
-            </div>
-            <div class="aufgabe">
-                <div class="aufgabe-bild">
-                    <img src="figures/aufgabe_waescheTrocknen_640.jpg" alt="figures/aufgabe_altImg_640.jpg" >
-                </div>
-                <div class="aufgabe-text">
-                    <div class="aufgabe-name">Wäsche trocknen</div>
-                    <p>Häufigkeit: alle zwei Tage</p>
-                    <p>Aufwand: 30 min</p>
-                    <p>Beschreibung: Wäsche aus der Waschmaschine holen und entweder aufhängen oder im Trockner trocknen</p>
-                    <p>Score: 20</p>
-                </div>
-            </div>
-            <div class="aufgabe">
-                <div class="aufgabe-bild">
-                    <img src="figures/aufgabe_waescheLegen_640.jpg" alt="figures/aufgabe_altImg_640.jpg">
-                </div>
-                <div class="aufgabe-text">
-                    <div class="aufgabe-name">Wäsche legen</div>
-                    <p>Häufigkeit: alle zwei Tage</p>
-                    <p>Aufwand: 30 min</p>
-                    <p>Beschreibung: trockene Wäsche legen und am besten gleich in den passenden Schrank einräumen</p>
-                    <p>Score: 20</p>
-                </div>
-            </div>
+            <div class="menue-ueberschrift">Details Aufgaben</div>
+            <?php $aufgaben = getAlleAufgaben() ?>
+            <?php foreach($aufgaben as $aufgabe){
+                ?>
+                    <div class="aufgabe">
+                        <div class="aufgabe-bild">
+                            <img src="<?php echo $aufgabe['bild']?>" alt="figures/aufgabe_altImg_640.jpg">
+                        </div>
+                        <div class="aufgabe-text">
+                            <div class="aufgabe-name"><?php echo $aufgabe['name'] ?></div>
+                            <div class="aufgabe-eigenschaften">
+                                <div class="eigenschaft">
+                                    <div>Häufigkeit:</div>
+                                    <div><?php echo $aufgabe['haeufigkeit'] ?></div>
+                                </div>
+                                <div class="eigenschaft">
+                                    <div>Aufwand:</div>
+                                    <div><?php echo $aufgabe['aufwand'] ?> Minuten</div>
+                                </div>
+                                <div class="eigenschaft">
+                                    <div>Beschreibung:</div>
+                                    <div><?php echo $aufgabe['beschreibung'] ?></div>
+                                </div>
+                                <div class="eigenschaft">
+                                    <div>Score:</div>
+                                    <div><?php echo $aufgabe['score'] ?></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php
+            }
+            ?>
         </div>
     </main>
     
