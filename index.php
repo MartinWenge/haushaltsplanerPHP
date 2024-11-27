@@ -27,7 +27,7 @@
         </div>
 
         <div class="inhaltsbereich">
-            <div class="menue-ueberschrift">Details Aufgaben</div>
+            <div class="menue-ueberschrift">Mögliche Aufgaben</div>
             <?php $aufgaben = getAlleAufgaben() ?>
             <?php foreach($aufgaben as $aufgabe){
                 ?>
