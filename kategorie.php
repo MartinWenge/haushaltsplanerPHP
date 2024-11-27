@@ -1,4 +1,13 @@
 <?php require "php/functions.php" ?>
+
+<?php 
+    if(isset($_GET['category'])){
+        $seitenKategorie = urldecode($_GET['category']);
+    }else{
+        $seitenKategorie = "*";
+    }
+?>
+
 <DOCTYPE html>
 <html lang="de">
 
@@ -28,7 +37,7 @@
 
         <div class="inhaltsbereich">
             <div class="menue-ueberschrift">Details Aufgaben</div>
-            <?php $aufgaben = getAlleAufgaben() ?>
+            <?php $aufgaben = getAufgabenNachKategorie($seitenKategorie) ?>
             <?php foreach($aufgaben as $aufgabe){
                 ?>
                     <div class="aufgabe">

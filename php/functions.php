@@ -10,13 +10,13 @@
         }
     }
 
-    function getKathegorien(){
+    function getKategorien(){
         $mysqli = dbConnect();
-        $result = $mysqli->query("select distinct kathegorie from aufgaben");
+        $result = $mysqli->query("select distinct kategorie from aufgaben");
         while($row = $result->fetch_assoc()){
-            $kathegorien[] = $row;
+            $kategorien[] = $row;
         }
-        return $kathegorien;
+        return $kategorien;
     }
 
     function getAlleAufgaben(){
@@ -28,4 +28,17 @@
         return $aufgaben;
     }
 
+    function getAufgabenNachKategorie($kategorie){
+        $mysqli = dbConnect();
+
+        $statement = $mysqli->prepare("select * from aufgaben where kategorie = ?");
+        $statement->bind_param("s",$kategorie);
+
+        $statement->execute();
+        $result = $statement->get_result();
+
+        $aufgaben = $result->fetch_all(MYSQLI_ASSOC);
+        
+        return $aufgaben;
+    }
 ?>
