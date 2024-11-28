@@ -2,12 +2,9 @@
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
     }
-    require "../config.php";
+    require "databaseConnection.php";
 
-    $mysqli = new mysqli(SERVER, USERNAME, PASSWORD,DATABASE);
-    if($mysqli->connect_errno != 0){
-        exit('Failed to connect to database: ' . mysqli_connect_error());
-    }
+    $mysqli = dbConnect();
 
     if ( !isset($_POST['username'], $_POST['password']) ) {
         exit('Please fill both the username and password fields!');
