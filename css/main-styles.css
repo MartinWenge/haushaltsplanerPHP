@@ -29,6 +29,10 @@ main {
     text-decoration: underline;
 }
 
+.inhaltsbereich {
+    margin-bottom: 50px;
+}
+
 .aufgabe {
     max-width: 300px;
     min-width: 100%;
@@ -44,10 +48,13 @@ main {
     transition: ease-in 0.2s;
 }
 
+.aufgabe .aufgabe-bild {
+    align-self: center;
+}
+
 .aufgabe .aufgabe-bild img{
     width: 80px;
     display: block;
-    align-self: center;
 }
 
 .aufgabe .aufgabe-text {
@@ -57,4 +64,10 @@ main {
 .aufgabe .aufgabe-text .aufgabe-name {
     color: var(--headline-font-color);
     font-weight: bold;
+}
+
+.eigenschaft {
+    display: grid;
+    grid-template-columns: 105px 1fr;
+    column-gap: 10px;
 }

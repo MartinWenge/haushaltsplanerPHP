@@ -1,0 +1,22 @@
+.kontakt {
+    width: 400px;
+    padding:10px 20px;
+    margin: 40px 100%;
+    box-shadow: 0 0 9px 0 lightslategray;
+    background-color: white;
+}
+
+.kontakt-ueberschrift {
+    padding: 10px 0;
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--headline-font-color);
+}
+
+.kontakt-github{
+    padding: 10px 0;
+}
+
+.kontakt-github a {
+    text-decoration: none;
+}

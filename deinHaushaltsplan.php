@@ -13,16 +13,7 @@
     <?php include "includes/nav.php" ?>
     
     <main>
-        <div class="kontakt">
-            <div class="kontakt-ueberschrift">Kontakt</div>
-            <p>Martin Wengenmayr</p>
-            <p>Lohrstr. 42</p>
-            <p>09113 Chemnitz</p>
-            <div class="kontakt-github">
-                <a href="https://github.com/MartinWenge"> MartinWenge auf Github</a>
-            </div>
-        </div>
-        
+        uff, hier kommt der große Kalender mit dem Haushaltsplan...
     </main>
     
     <?php include "includes/footer.php" ?>
