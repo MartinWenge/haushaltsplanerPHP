@@ -12,7 +12,6 @@
 
 <body>
     <?php include "includes/nav.php" ?>
-    <?php include "includes/header.php" ?>
     
     <main>
         <div class="login">
@@ -33,7 +32,6 @@
     
     <?php include "includes/footer.php" ?>
 
-    <script src="javascript/script.js"></script>
 </body>
 
 </html>

@@ -41,4 +41,17 @@
         
         return $aufgaben;
     }
+
+    function getAccountInfo($accountId) {
+        $mysqli = dbConnect();
+
+        $statement = $mysqli->prepare("select username,email from accounts where id = ?");
+        $statement->bind_param("i", $accountId);
+
+        $statement->execute();
+        $result = $statement->get_result();
+        $userInfoArray = $result->fetch_all(MYSQLI_ASSOC);
+
+        return $userInfoArray[0];
+    }
 ?>

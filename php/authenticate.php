@@ -1,5 +1,7 @@
 <?php
-    session_start();
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
     require "../config.php";
 
     $mysqli = new mysqli(SERVER, USERNAME, PASSWORD,DATABASE);
@@ -26,8 +28,10 @@
             $_SESSION['loggedin'] = TRUE;
             $_SESSION['name'] = $_POST['username'];
             $_SESSION['id'] = $id;
-            echo 'Welcome back, ' . htmlspecialchars($_SESSION['name'], ENT_QUOTES) . '!';
+            header("Location: ../accountinfo.php");
         } else {
+            session_regenerate_id();
+            $_SESSION['loggedin'] = NULL;
             echo 'Incorrect username and/or password!';
         }
     } else {

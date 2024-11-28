@@ -3,9 +3,10 @@
 @import url("nav-styles.css");
 @import url("header-styles.css");
 @import url("footer-styles.css");
-@import url("kontakt.css");
+@import url("kontakt-styles.css");
 @import url("main-styles.css");
 @import url("login-styles.css");
+@import url("accountinfo-styles.css");
 
 *{
     margin: 0;

@@ -36,7 +36,7 @@
         </div>
 
         <div class="inhaltsbereich">
-            <div class="menue-ueberschrift">Details Aufgaben</div>
+            <div class="menue-ueberschrift">Aufgaben in der Kategorie <?php echo $seitenKategorie ?></div>
             <?php $aufgaben = getAufgabenNachKategorie($seitenKategorie) ?>
             <?php foreach($aufgaben as $aufgabe){
                 ?>
@@ -80,7 +80,6 @@
     
     <?php include "includes/footer.php" ?>
 
-    <script src="javascript/script.js"></script>
 </body>
 
 </html>
