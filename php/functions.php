@@ -29,6 +29,7 @@
         $result = $statement->get_result();
 
         $aufgaben = $result->fetch_all(MYSQLI_ASSOC);
+        $statement->close();
         
         return $aufgaben;
     }
@@ -42,7 +43,22 @@
         $statement->execute();
         $result = $statement->get_result();
         $userInfoArray = $result->fetch_all(MYSQLI_ASSOC);
+        $statement->close();
 
         return $userInfoArray[0];
+    }
+
+    function getAufgabeById($aufgabenId) {
+        $mysqli = dbConnect();
+
+        $statement = $mysqli->prepare("select * from aufgaben where id = ?");
+        $statement->bind_param("i",$aufgabenId);
+
+        $statement->execute();
+        $result = $statement->get_result();
+        $aufgabenArray = $result->fetch_all(MYSQLI_ASSOC);
+        $statement->close();
+
+        return $aufgabenArray[0];
     }
 ?>

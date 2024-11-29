@@ -33,6 +33,10 @@ main {
     margin-bottom: 50px;
 }
 
+.inhaltsbereich a {
+    text-decoration: none;
+}
+
 .aufgabe {
     max-width: 300px;
     min-width: 100%;

@@ -9,8 +9,8 @@ if (!isset($_SESSION['loggedin'])) {
 }
 
 require "php/functions.php";
-if(isset($_SESSION['id'])){
-    $userInfo = getAccountInfo($_SESSION['id']);
+if(isset($_SESSION['userId'])){
+    $userInfo = getAccountInfo($_SESSION['userId']);
 }
 
 ?>

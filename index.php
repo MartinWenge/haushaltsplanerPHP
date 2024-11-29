@@ -1,4 +1,16 @@
 <?php require "php/functions.php" ?>
+<?php
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    if (isset($_SESSION['loggedin'])) {
+        $isLoggedIn = TRUE;
+    } else {
+        $isLoggedIn = FALSE;
+    }
+?>
+
 <DOCTYPE html>
 <html lang="de">
 
@@ -29,8 +41,10 @@
         <div class="inhaltsbereich">
             <div class="menue-ueberschrift">Mögliche Aufgaben</div>
             <?php $aufgaben = getAlleAufgaben() ?>
-            <?php foreach($aufgaben as $aufgabe){
-                ?>
+            <?php foreach($aufgaben as $aufgabe): ?>
+                <?php if($isLoggedIn): ?>
+                    <a href="aufgabeEinplanen.php?userId=<?=htmlspecialchars($_SESSION['userId'], ENT_QUOTES)?>&aufgabeId=<?=$aufgabe["id"]?>" >
+                <?php endif; ?>
                     <div class="aufgabe">
                         <div class="aufgabe-bild">
                             <img src="<?php 
@@ -63,9 +77,10 @@
                             </div>
                         </div>
                     </div>
-                <?php
-            }
-            ?>
+                <?php if($isLoggedIn): ?>
+                    </a>
+                <?php endif; ?>
+            <?php endforeach; ?>
         </div>
     </main>
     
