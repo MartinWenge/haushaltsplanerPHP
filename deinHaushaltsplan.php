@@ -41,6 +41,61 @@
         </div>
 
         <div class="inhaltsbereich">
+            <div class="menue-ueberschrift">Dein Aufgabenkalender</div>
+            <div class="container-haushaltsplan-kalender">
+
+                <div class="element-haushaltsplan-kalender">
+                    <div class="datum">Montag, 02.12.2024</div>
+                    <div class="aufgaben">
+                        <ul>
+                            <li>Wäsche waschen</li>
+                            <li>Wäsche trocknen</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="element-haushaltsplan-kalender">
+                    <div class="datum">Dienstag, 03.12.2024</div>
+                    <div class="aufgaben"></div>
+                </div>
+                
+                <div class="element-haushaltsplan-kalender">
+                    <div class="datum">Mittwoch, 04.12.2024</div>
+                    <div class="aufgaben">
+                        <ul>
+                            <li>Wäsche legen</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="element-haushaltsplan-kalender">
+                    <div class="datum">Donnerstag, 05.12.2024</div>
+                    <div class="aufgaben"></div>
+                </div>
+
+                <div class="element-haushaltsplan-kalender">
+                    <div class="datum">Freitag, 06.12.2024</div>
+                    <div class="aufgaben"></div>
+                </div>
+
+                <div class="element-haushaltsplan-kalender">
+                    <div class="datum">Samstag, 07.12.2024</div>
+                    <div class="aufgaben">
+                        <ul>
+                            <li>Wäsche waschen</li>
+                            <li>Wäsche trocknen</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="element-haushaltsplan-kalender">
+                    <div class="datum">Sonnatg, 08.12.2024</div>
+                    <div class="aufgaben"></div>
+                </div>
+                
+            </div>
+
+
             <div class="menue-ueberschrift">Deine Aufgabeliste:</div>
             <?php $aufgaben = getTasks($_SESSION['userId'], $sortierung); ?>
             <?php if(count($aufgaben) == 0): ?>
