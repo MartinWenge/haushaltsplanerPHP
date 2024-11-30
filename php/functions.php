@@ -12,7 +12,7 @@
 
     function getAlleAufgaben(){
         $mysqli = dbConnect();
-        $result = $mysqli->query("select * from aufgaben order by rand() limit 50");
+        $result = $mysqli->query("select a.id as id, a.name as name, a.bild as bild, a.beschreibung as beschreibung, a.score as score, a.aufwand as aufwand, lh.name as haeufigkeit from aufgaben as a INNER JOIN lookuphaeufigkeit as lh on a.haeufigkeit = lh.id order by rand() limit 50");
         while($row = $result->fetch_assoc()){
             $aufgaben[] = $row;
         }
@@ -22,7 +22,7 @@
     function getAufgabenNachKategorie($kategorie){
         $mysqli = dbConnect();
 
-        $statement = $mysqli->prepare("select * from aufgaben where kategorie = ?");
+        $statement = $mysqli->prepare("select a.id as id, a.name as name, a.bild as bild, a.beschreibung as beschreibung, a.score as score, a.aufwand as aufwand, lh.name as haeufigkeit from aufgaben as a INNER JOIN lookuphaeufigkeit as lh on a.haeufigkeit = lh.id where a.kategorie = ? limit 50");
         $statement->bind_param("s",$kategorie);
 
         $statement->execute();
@@ -51,7 +51,7 @@
     function getAufgabeById($aufgabenId) {
         $mysqli = dbConnect();
 
-        $statement = $mysqli->prepare("select * from aufgaben where id = ?");
+        $statement = $mysqli->prepare("select a.id as id, a.name as name, a.bild as bild, a.beschreibung as beschreibung, a.score as score, a.aufwand as aufwand, lh.name as haeufigkeit from aufgaben as a INNER JOIN lookuphaeufigkeit as lh on a.haeufigkeit = lh.id where a.id = ? limit 50");
         $statement->bind_param("i",$aufgabenId);
 
         $statement->execute();
@@ -60,5 +60,31 @@
         $statement->close();
 
         return $aufgabenArray[0];
+    }
+
+    function addPlaneNeueAufgabeEin($idAufgabe, $idUser, $datum) {
+        $mysqli = dbConnect();
+
+        $statement = $mysqli->prepare("insert into tasks (userId, aufgabenId, date, isDone) values (?,?,?,0)");
+        $statement->bind_param("iis",$idUser,$idAufgabe,$datum);
+
+        $statement->execute();
+        $statement->close();
+
+        return TRUE;
+    }
+
+    function getHaeufigkeitInTagenByAufgabe($idAufgabe) {
+        $mysqli = dbConnect();
+
+        $statement = $mysqli->prepare("select lh.days as tage from lookuphaeufigkeit as lh INNER JOIN aufgaben as a ON a.haeufigkeit = lh.id WHERE a.id = ? LIMIT 1");
+        $statement->bind_param("i",$idAufgabe);
+
+        $statement->execute();
+        $statement->store_result();
+        $statement->bind_result($tage);
+        $statement->fetch();
+
+        return $tage;
     }
 ?>
