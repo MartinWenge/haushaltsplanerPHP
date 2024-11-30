@@ -18,13 +18,12 @@
     if ($statement->num_rows > 0) {
         $statement->bind_result($id, $password);
         $statement->fetch();
-        // Note: remember to use password_hash in your registration file to store the hashed passwords.
+
         if (password_verify($_POST['password'], $password)) {
-            // Create sessions, so we know the user is logged in, they basically act like cookies but remember the data on the server.
             session_regenerate_id();
             $_SESSION['loggedin'] = TRUE;
             $_SESSION['name'] = $_POST['username'];
-            $_SESSION['id'] = $id;
+            $_SESSION['userId'] = $id;
             header("Location: ../accountinfo.php");
         } else {
             session_regenerate_id();

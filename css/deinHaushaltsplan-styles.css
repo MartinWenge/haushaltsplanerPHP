@@ -1,0 +1,42 @@
+.inhaltsbereich .aufgabeHaushaltsplan {
+    color: black;
+    padding: 5px 20px;
+}
+
+.inhaltsbereich .aufgabeHaushaltsplan form {
+    display: inline-block;
+}
+
+.inhaltsbereich .aufgabeHaushaltsplan form input[type="submit"] {
+    width: 200px;
+    background-color: lightgrey;
+    color: var(--headline-font-color);
+    padding: 1px 10px;
+    cursor: pointer;
+    font-size: 16px;
+    border-style: solid thin;
+    border-color: lightgrey;;
+    border-radius: 3px;
+    transition: background-color 0.2s;
+}
+
+.inhaltsbereich .aufgabeHaushaltsplan form input[type="submit"]:hover {
+    background-color: var(--headline-font-color);
+    border-color: var(--headline-font-color);
+    color: white;
+    transition: background-color 0.2s;
+}
+
+.istErledigtLabel {
+    width: 200px;
+    display: inline-block;
+    font-size: 16px;
+    text-align: center;
+    padding: 3px 0;
+    background-color: var(--headline-font-color);
+    border-style: solid thin;
+    border-color: var(--headline-font-color);
+    border-radius: 3px;
+    color: white;
+}
+

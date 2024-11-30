@@ -10,11 +10,11 @@
     }
 ?>
 <nav>
-    <div class="haushaltsplaner">Haushaltsplaner</div>
+    <div class="haushaltsplaner"><a href="index.php">Haushaltsplaner</a></div>
     <div class="links">
         <a href="index.php">Startseite</a>
-        <a href="kontakt.php">Kontakt</a>
         <?php if(! $showLogedInPages): ?>
+            <a href="kontakt.php">Kontakt</a>
             <a href="login.php">Login</a>
         <?php endif; ?>
         <?php if($showLogedInPages): ?>
