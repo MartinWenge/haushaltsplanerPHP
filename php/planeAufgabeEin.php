@@ -8,10 +8,7 @@
     $userId = $_POST['userId'];
     $datum = $_POST['startdatum'];
 
-    echo "aufgabenId= $aufgabenId, userId = $userId, startdatum = $datum, numWiederholungen = " . $_POST['repeat'];
-
     $tageZwischenWiederholungen = getHaeufigkeitInTagenByAufgabe($aufgabenId);
-    echo " <br> tage zwischen wiederholungen = $tageZwischenWiederholungen";
 
     for ($i =0; $i < $_POST['repeat']; $i++){
         addPlaneNeueAufgabeEin($aufgabenId,$userId,$datum);
@@ -20,5 +17,7 @@
         $date->modify('+' . $tageZwischenWiederholungen . ' days');
         $datum = $date->format('Y-m-d');
     }
+
+    header("Location: ../deinHaushaltsplan.php");
 
 ?>

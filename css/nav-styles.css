@@ -17,7 +17,15 @@ nav .haushaltsplaner {
     color: var(--headline-font-color);
 }
 
-nav a {
+nav .haushaltsplaner a {
+    text-decoration: none;
+}
+
+nav .haushaltsplaner a:visited {
+    color: var(--headline-font-color);
+}
+
+nav .links a {
     text-decoration: none;
     display: inline-block;
     padding: 10px 35px;
@@ -26,7 +34,7 @@ nav a {
     font-size: 18px;
 }
 
-nav a:hover {
+nav .links a:hover {
     color: var(--highlight-nav-link-font-color);
     border-radius: 3px;
     background-color: lightgray;

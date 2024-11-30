@@ -8,6 +8,7 @@
 @import url("login-styles.css");
 @import url("accountinfo-styles.css");
 @import url("planeAugabeEin-styles.css");
+@import url("deinHaushaltsplan-styles.css");
 
 *{
     margin: 0;
