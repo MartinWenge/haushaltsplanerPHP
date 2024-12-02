@@ -14,7 +14,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
     <title>Haushaltsplaner</title>
 </head>
 
@@ -49,18 +49,22 @@
 
             <div class="login-ueberschrift">Neuen Account anlegen</div>
 			<form action="php/register.php" method="post" autocomplete="off">
-				<label for="username">
+				<label for="usernameNew">
 					<i class="fas fa-user"></i>
 				</label>
 				<input type="text" name="usernameNew" placeholder="Benutzername" id="username_new" required>
-				<label for="password">
+				<label for="passwordNew">
 					<i class="fas fa-lock"></i>
 				</label>
 				<input type="password" name="passwordNew" placeholder="Passwort" id="password_new" required>
-				<label for="email">
+				<label for="emailNew">
 					<i class="fas fa-envelope"></i>
 				</label>
 				<input type="email" name="emailNew" placeholder="Email" id="email_new" required>
+                <label for="birthdayNew">
+					<i class="fas fa-birthday-cake"></i>
+				</label>
+				<input type="date" name="birthdayNew" placeholder="Geburtstag" id="birthday_new" required>
 				<input type="submit" value="Account erstellen">
 			</form>
 		</div>
