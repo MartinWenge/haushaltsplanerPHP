@@ -102,7 +102,7 @@
                 <div class="aufgabeHaushaltsplan">Diese Liste ist leer.</div>
             <?php endif; ?>
             <?php foreach($aufgaben as $aufgabe): ?>
-                <?php $datum = substr($aufgabe['datum'],-2,2) . "." . substr($aufgabe['datum'],5,2) . "." . substr($aufgabe['datum'],0,4);?>
+                <?php $datum = formatiereDatum($aufgabe['datum']); ?>
                 <div class="aufgabeHaushaltsplan">
                     <b><?=$aufgabe['name'] ?></b> (<?=$aufgabe['aufwand'] ?> min, <?=$aufgabe['score'] ?> Punkte), eingeplant am <b><?=$datum ?></b>.
                     <?php if($aufgabe['isDone'] == 0): ?>

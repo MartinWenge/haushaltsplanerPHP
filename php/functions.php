@@ -37,7 +37,7 @@
     function getAccountInfo($accountId) {
         $mysqli = dbConnect();
 
-        $statement = $mysqli->prepare("select username,email from accounts where id = ?");
+        $statement = $mysqli->prepare("SELECT id AS userId, username, email, birthday FROM accounts WHERE id = ?");
         $statement->bind_param("i", $accountId);
 
         $statement->execute();
@@ -118,5 +118,10 @@
         $statement->close();
 
         return TRUE;
+    }
+
+    function formatiereDatum($datum) {
+        $datumFormatiert = substr($datum,-2,2) . "." . substr($datum,5,2) . "." . substr($datum,0,4);
+        return $datumFormatiert;
     }
 ?>
