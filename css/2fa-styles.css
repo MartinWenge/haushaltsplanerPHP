@@ -1,4 +1,4 @@
-.accountinfo {
+.twofapage {
     width: 400px;
     padding:10px 20px;
     margin: 40px 100%;
@@ -6,14 +6,14 @@
     background-color: white;
 }
 
-.accountinfo-ueberschrift {
+.twofapage-ueberschrift {
     padding: 10px 0;
     font-size: 22px;
     font-weight: bold;
     color: var(--headline-font-color);
 }
 
-.accountinfo .hinweis {
+.twofapage .hinweis {
     background-color: lightgray;
     color: black;
     padding: 10px 20px;
@@ -23,7 +23,7 @@
     margin-bottom: 30px;
 }
 
-.accountinfo .hinweis i {
+.twofapage .hinweis i {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -33,30 +33,14 @@
     color: white;
 }
 
-.infobox {
-    margin: 10px 0px 30px 0;
-    line-height: 24px;
-}
-
-.information {
-    display: grid;
-    grid-template-columns: 110px 1fr;
-    column-gap: 10px;
-}
-
-.accountinfo .formbox {
-    margin-bottom: 30px;
-    border-top: solid thin lightgray;
-}
-
-.accountinfo form {
+.twofaaufgabe form {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     padding: 20px 0;
 }
 
-.accountinfo form label {
+.twofaaufgabe form label {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -66,7 +50,7 @@
     color: white;
 }
 
-.accountinfo form input[type="password"] {
+.twofaaufgabe form input[type="text"] {
     width: 310px;
     height: 50px;
     border: 1px thin darkgrey;
@@ -74,7 +58,7 @@
     padding: 0 15px;
 }
 
-.accountinfo form input[type="submit"] {
+.twofaaufgabe form input[type="submit"] {
     width: 100%;
     padding: 15px;
     background-color: var(--headline-font-color);
@@ -85,7 +69,7 @@
     transition: background-color 0.2s;
 }
 
-.accountinfo form input[type="submit"]:hover {
+.twofaaufgabe form input[type="submit"]:hover {
     background-color: lightgrey;
     color: var(--headline-font-color);
     transition: background-color 0.2s;
