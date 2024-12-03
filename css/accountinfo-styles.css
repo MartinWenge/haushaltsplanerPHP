@@ -44,6 +44,11 @@
     column-gap: 10px;
 }
 
+.accountinfo .formbox {
+    margin-bottom: 30px;
+    border-top: solid thin lightgray;
+}
+
 .accountinfo form {
     display: flex;
     flex-wrap: wrap;

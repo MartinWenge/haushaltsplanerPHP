@@ -1,4 +1,8 @@
 <?php 
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+
     require "functions.php";
 
     // change password
@@ -35,12 +39,50 @@
         $mysqli->close();
     }
 
-    elseif ( isset($_POST['userId'], $_POST['deleteAccount'])) {
-        # code...
-    }
+    elseif ( isset($_POST['userId'], $_POST['deleteAccount'], $_POST['password'])) {
+        $mysqli = dbConnect();
+        
+        if($statement = $mysqli->prepare('SELECT password FROM accounts WHERE id = ?')) {
+            $statement->bind_param('i', $_POST['userId']);
+            $statement->execute();
+            $statement->store_result();
+            $statement->bind_result($password);
+            $statement->fetch();
 
-    elseif ( isset($_POST['userId'], $_POST['resetAccount'])) {
-        # code...
+            if (password_verify($_POST['password'], $password)) {
+                $isTaksDeleted = FALSE;
+                if($statement = $mysqli->prepare('DELETE FROM tasks WHERE userId = ?')) {
+                    $statement->bind_param('i', $_POST['userId']);
+                    $statement->execute();
+
+                    $isTaksDeleted = TRUE;
+                } else {
+                    echo 'Could not prepare statement';
+                }
+
+                $isAccountDeleted = FALSE;
+                if($statement = $mysqli->prepare('DELETE FROM accounts WHERE id = ?')) {
+                    $statement->bind_param('i', $_POST['userId']);
+                    $statement->execute();
+
+                    $isAccountDeleted = TRUE;
+                } else {
+                    echo 'Could not prepare statement';
+                }
+
+                if($isAccountDeleted && $isTaksDeleted) {
+                    session_regenerate_id();
+                    $_SESSION['loggedin'] = NULL;
+                    header(("Location: ../index.php"));
+                } else {
+                    header("Location: ../accountinfo.php?modifyAccount=TRUE&action=deleteError");
+                }
+            } else {
+                header("Location: ../accountinfo.php?modifyAccount=TRUE&action=unauthorized");
+            }
+        } else {
+            echo 'Could not prepare statement';
+        }
     }
 
     else {

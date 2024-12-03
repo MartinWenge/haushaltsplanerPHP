@@ -11,6 +11,7 @@
     $isModifiedAccount = FALSE;
     $isPWChanged       = FALSE;
     $isUnauthorized    = FALSE;
+    $isDeleteError     = FALSE;
     if(isset($_GET['modifyAccount'], $_GET['action'])){
         if($_GET['modifyAccount'] == TRUE){
             $isModifiedAccount = TRUE;
@@ -19,6 +20,9 @@
             }
             if($_GET['action'] == "unauthorized"){
                 $isUnauthorized = TRUE;
+            }
+            if($_GET['action'] == "deleteError"){
+                $isDeleteError = TRUE;
             }
         }
     }
@@ -51,13 +55,19 @@
 
                 <?php if($isPWChanged): ?>
                     <div class="hinweis">
-                        Du hast dein Passwort erfolgreich aktualisiert <i class="fas fa-thumbs-up"></i>
+                        Du hast dein Passwort erfolgreich aktualisiert. <i class="fas fa-thumbs-up"></i>
                     </div>
                 <?php endif; ?>
 
                 <?php if($isUnauthorized): ?>
                     <div class="hinweis">
-                        Das hat nicht geklappt. Gibt dein aktuelles und ein neues Passwort ein <i class="far fa-times-circle"></i>
+                        Das war nix. Bitte gib dein aktuelles Passwort zur Bestätigung ein. <i class="far fa-times-circle"></i>
+                    </div>
+                <?php endif; ?>
+
+                <?php if($isDeleteError): ?>
+                    <div class="hinweis">
+                        Das hat nicht geklappt, bitte versuche es nochmal. <i class="fas fa-bug"></i>
                     </div>
                 <?php endif; ?>
             <?php endif; ?>
@@ -78,20 +88,35 @@
                 </div>
             </div>
             
+            <div class="formbox">
+                <div class="accountinfo-ueberschrift">Passwort ändern</div>
+                <form action="php/changeAccountInfo.php" method="post">
+                    <label for="passwordAlt">
+                        <i class="fas fa-lock-open"></i>
+                    </label>
+                    <input type="password" name="passwordAlt" placeholder="altes Passwort" id="passwordAlt" required>
+                    <label for="passwordNeu">
+                        <i class="fas fa-lock"></i>
+                    </label>
+                    <input type="password" name="passwordNeu" placeholder="neues Passwort" id="passwordNeu" required>
+                    <input type="hidden" id="userId" name="userId" value="<?=$userInfo['userId']?>">
+                    <input type="submit" value="Passwort ändern">
+                </form>
+            </div>
 
-            <div class="accountinfo-ueberschrift">Passwort ändern</div>
-            <form action="php/changeAccountInfo.php" method="post">
-                <label for="passwordAlt">
-                    <i class="fas fa-lock-open"></i>
-                </label>
-                <input type="password" name="passwordAlt" placeholder="altes Passwort" id="passwordAlt" required>
-                <label for="passwordNeu">
-                    <i class="fas fa-lock"></i>
-                </label>
-                <input type="password" name="passwordNeu" placeholder="neues Passwort" id="passwordNeu" required>
-                <input type="hidden" id="userId" name="userId" value="<?=$userInfo['userId']?>">
-                <input type="submit" value="Passwort ändern">
-            </form>
+            <div class="formbox">
+                <div class="accountinfo-ueberschrift">Account löschen</div>
+                Achtung, hierdurch werden alle deine bisher eingeplanten Aufgaben und dein Account unwiederruflich gelöscht.
+                <form action="php/changeAccountInfo.php" method="post">
+                    <label for="password">
+                        <i class="fas fa-lock-open"></i>
+                    </label>
+                    <input type="password" name="password" placeholder="aktuelles Passwort" id="password" required>
+                    <input type="hidden" id="userId" name="userId" value="<?=$userInfo['userId']?>">
+                    <input type="hidden" id="deleteAccount" name="deleteAccount" value="deleteAccount">
+                    <input type="submit" value="Account löschen">
+                </form>
+            </div>            
 
         </div>
         
