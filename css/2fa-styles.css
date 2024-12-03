@@ -1,38 +1,46 @@
-.aufgabenbeschreibung {
-    width: 600px;
+.twofapage {
+    width: 400px;
+    padding:10px 20px;
+    margin: 40px 100%;
     box-shadow: 0 0 9px 0 lightslategray;
     background-color: white;
-    margin: 40px 50%;
 }
 
-.aufgbeschr-ueberschrift {
-    color: var(--headline-font-color);
-    padding: 10px 20px 0 20px;
+.twofapage-ueberschrift {
+    padding: 10px 0;
     font-size: 22px;
     font-weight: bold;
-}
-
-.aufgabenbeschreibung .formBeschreibung {
-    padding: 10px 20px 0 20px;
-    font-size: 18px;
     color: var(--headline-font-color);
 }
 
-.aufgabenbeschreibung .eigenschaft {
+.twofapage .hinweis {
+    background-color: lightgray;
+    color: black;
+    padding: 10px 20px;
     display: grid;
-    grid-template-columns: 90px 1fr;
+    grid-template-columns: 1fr 40px;
     column-gap: 10px;
-    padding: 0 20px;
+    margin-bottom: 30px;
 }
 
-.aufgabenbeschreibung form {
+.twofapage .hinweis i {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background-color: var(--headline-font-color);
+    color: white;
+}
+
+.twofaaufgabe form {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     padding: 20px 0;
 }
 
-.aufgabenbeschreibung form label {
+.twofaaufgabe form label {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -42,19 +50,17 @@
     color: white;
 }
 
-.aufgabenbeschreibung form input[type="number"],
-.aufgabenbeschreibung form input[type="date"] {
-    width: 490px;
+.twofaaufgabe form input[type="text"] {
+    width: 310px;
     height: 50px;
     border: 1px thin darkgrey;
-    margin: 0 20px 10px 0;
+    margin-bottom: 20px;
     padding: 0 15px;
 }
 
-.aufgabenbeschreibung form input[type="submit"] {
+.twofaaufgabe form input[type="submit"] {
     width: 100%;
     padding: 15px;
-    margin: 0px 20px;
     background-color: var(--headline-font-color);
     border: 0;
     cursor: pointer;
@@ -63,7 +69,7 @@
     transition: background-color 0.2s;
 }
 
-.aufgabenbeschreibung form input[type="submit"]:hover {
+.twofaaufgabe form input[type="submit"]:hover {
     background-color: lightgrey;
     color: var(--headline-font-color);
     transition: background-color 0.2s;

@@ -21,10 +21,13 @@
 
         if (password_verify($_POST['password'], $password)) {
             session_regenerate_id();
-            $_SESSION['loggedin'] = TRUE;
+            // don' set login flag here, go for 2FA
+            $_SESSION['loggedin'] = NULL;
             $_SESSION['name'] = $_POST['username'];
             $_SESSION['userId'] = $id;
-            header("Location: ../accountinfo.php");
+
+            // go to 2FA page
+            header("Location: ../2fapage.php");
         } else {
             session_regenerate_id();
             $_SESSION['loggedin'] = NULL;

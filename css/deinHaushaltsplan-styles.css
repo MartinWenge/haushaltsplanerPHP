@@ -40,3 +40,35 @@
     color: white;
 }
 
+.container-haushaltsplan-kalender {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    margin: 20px;
+    border-top: thin solid lightgray;
+    border-bottom: thin solid lightgray;
+}
+
+.container-haushaltsplan-kalender .element-haushaltsplan-kalender {
+    padding: 10px;
+    justify-self: stretch;
+    border-right: thin solid lightgray;
+    border-left: thin solid lightgray;
+}
+
+.container-haushaltsplan-kalender .element-haushaltsplan-kalender .datum {
+    font-weight: bold;
+    margin-bottom: 10px;
+    border-bottom: thin solid lightgray;
+}
+
+.container-haushaltsplan-kalender .element-haushaltsplan-kalender .aufgaben {
+    font-size: 16px;
+}
+
+.container-haushaltsplan-kalender .element-haushaltsplan-kalender .aufgaben ul {
+    list-style-type: none;
+}
+
+.container-haushaltsplan-kalender .element-haushaltsplan-kalender .aufgaben li {
+    padding: 10px 0;
+}

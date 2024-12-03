@@ -9,6 +9,7 @@
 @import url("accountinfo-styles.css");
 @import url("planeAugabeEin-styles.css");
 @import url("deinHaushaltsplan-styles.css");
+@import url("2fa-styles.css");
 
 *{
     margin: 0;
@@ -21,5 +22,3 @@ body{
     min-height: 100%;
     color: black;
 }
-
-
