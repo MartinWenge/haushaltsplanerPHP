@@ -46,7 +46,7 @@
 
         if($verification == TRUE) {
             $_SESSION['loggedin'] = TRUE;
-            header("Location: ../accountinfo.php");
+            header("Location: ../deinHaushaltsplan.php");
         } else {
             header("Location: ../2fapage.php?action=unauthorized");
         }

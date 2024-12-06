@@ -10,10 +10,20 @@
         exit;
     }
 
+    if(isset($_SESSION['userId'])){
+        $userId = $_SESSION['userId'];
+    }
+
     if(isset($_GET['sortierung'])){
         $sortierung = urldecode($_GET['sortierung']);
     } else {
         $sortierung = "alle";
+    }
+
+    if(isset($_GET['startdatum'])){
+        $startdatum = $_GET['startdatum'];
+    } else {
+        $startdatum = date("Y-m-d");
     }
 ?>
 
@@ -25,6 +35,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
     <title>Haushaltsplaner</title>
 </head>
 
@@ -34,7 +45,17 @@
     
     <main>
         <div class="seitenmenue">
-            <div class="menue-ueberschrift">Deine Aufgaben</div>
+            <div class="menue-ueberschrift">Neue Aufgabe</div>
+            <?php $kategorien = getKategorien() ?>
+            <?php 
+                foreach($kategorien as $kategorie){
+                    ?>
+                        <a href="kategorie.php?category=<?php echo urlencode($kategorie['kategorie']) ?>"><?php echo $kategorie['kategorie'] ?></a>
+                    <?php
+                }
+            ?>
+
+            <div class="menue-ueberschrift seitenmenue-trenner">Deine Aufgaben</div>
             <a href="deinHaushaltsplan.php?sortierung=alle">alle Aufgaben</a>
             <a href="deinHaushaltsplan.php?sortierung=offen">offene Aufgaben</a>
             <a href="deinHaushaltsplan.php?sortierung=erledigt">erledigte Aufgaben</a>
@@ -44,6 +65,33 @@
             <div class="menue-ueberschrift">Dein Aufgabenkalender</div>
             <div class="container-haushaltsplan-kalender">
 
+                <?php $wochenaufgaben = getWochenaufgaben($startdatum,$userId); ?>
+                <?php foreach($wochenaufgaben as $tag): ?>
+                    <div class="element-haushaltsplan-kalender">
+                        <div class="datum"><?=formatiereDatumUndTag($tag['datum'])?></div>
+                        <?php foreach($tag['aufgaben'] as $aufgabe): ?>
+                            <div class="aufgaben">
+                                <div class="aufgabenname"><?=$aufgabe["name"];?></div>
+                                <div class="aufgabenbuttons">
+                                    <div>
+                                        <form action="php/aufgabeErledigt.php" method="post">
+                                            <input type="hidden" id="taskId" name="taskId" value="<?=$aufgabe['id']?>">
+                                            <input type="submit" name="submit" id="submit" value="&#xf00c;">
+                                        </form>
+                                    </div>
+                                    <div>
+                                        <form action="aufgabeBearbeiten.php" method="post">
+                                            <input type="hidden" id="taskId" name="taskId" value="<?=$aufgabe['id']?>">
+                                            <input type="submit" name="submit" id="submit" value="&#xf013;">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                <?php endforeach; ?>
+
+<!--
                 <div class="element-haushaltsplan-kalender">
                     <div class="datum">Montag, 02.12.2024</div>
                     <div class="aufgaben">
@@ -94,10 +142,11 @@
                 </div>
                 
             </div>
+-->
 
-
+<!--
             <div class="menue-ueberschrift">Deine Aufgabeliste:</div>
-            <?php $aufgaben = getTasks($_SESSION['userId'], $sortierung); ?>
+            <?php $aufgaben = getTasks($userId, $sortierung); ?>
             <?php if(count($aufgaben) == 0): ?>
                 <div class="aufgabeHaushaltsplan">Diese Liste ist leer.</div>
             <?php endif; ?>
@@ -116,6 +165,7 @@
                     <?php endif; ?>
                 </div>
             <?php endforeach; ?>
+-->
         </div>
 
     </main>

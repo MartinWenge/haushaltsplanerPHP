@@ -109,6 +109,20 @@
         return $aufgaben;
     }
 
+    function getTaskById($taskId) {
+        $mysqli = dbConnect();
+        
+        if($statement = $mysqli->prepare("SELECT t.id AS id, t.date AS datum, a.name AS name, a.score AS score, a.aufwand AS aufwand FROM tasks AS t INNER JOIN aufgaben AS a ON a.id = t.aufgabenId WHERE t.id = ? LIMIT 1")) {
+            $statement->bind_param("i", $taskId);
+            $statement->execute();
+            $result = $statement->get_result();
+            $tasks = $result->fetch_all(MYSQLI_ASSOC);
+            $statement->close();
+        }
+
+        return $tasks[0];
+    }
+
     function erledigeTaskById($taskId) {
         $mysqli = dbConnect();
 
@@ -120,8 +134,44 @@
         return TRUE;
     }
 
+    function aendereTaskDatumById($taskId, $neuesDatum) {
+        // write update statement
+    }
+
     function formatiereDatum($datum) {
         $datumFormatiert = substr($datum,-2,2) . "." . substr($datum,5,2) . "." . substr($datum,0,4);
         return $datumFormatiert;
+    }
+
+    function formatiereDatumUndTag($datum) {
+        $date = new DateTime($datum, new DateTimeZone('Europe/Berlin'));
+        return $date->format('l') . ",<br>" . formatiereDatum($datum);
+    }
+
+    function getWochenaufgaben($startdatum,$userId){
+        $datum = new DateTime($startdatum, new DateTimeZone('Europe/Berlin'));
+
+        for($i = 0; $i < 7; $i++){
+            $aufgaben = getActiveTasksByDatumUndUser($datum->format("Y-m-d"), $userId);
+            $day = array('datum' => $datum->format("Y-m-d"), 'aufgaben' => $aufgaben);
+
+            $datum->modify('+1 day');
+            $wochenaufgaben[] = $day;
+        }
+        return $wochenaufgaben;
+    }
+
+    function getActiveTasksByDatumUndUser($datum, $userId){
+        $mysqli = dbConnect();
+
+        $statement = $mysqli->prepare("SELECT t.id, a.name FROM tasks AS t INNER JOIN aufgaben AS a ON t.aufgabenId = a.id WHERE t.isDone = 0 AND t.userId = ? AND t.date = ?");
+        $statement->bind_param("is", $userId, $datum);
+
+        $statement->execute();
+        $result = $statement->get_result();
+        $aufgaben = $result->fetch_all(MYSQLI_ASSOC);
+        $statement->close();
+
+        return $aufgaben;
     }
 ?>

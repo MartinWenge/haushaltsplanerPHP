@@ -1,3 +1,9 @@
+.seitenmenue .seitenmenue-trenner {
+    border-top: solid thin lightgray;
+    margin-top: 30px;
+    padding-top: 10px;
+}
+
 .inhaltsbereich .aufgabeHaushaltsplan {
     color: black;
     padding: 5px 20px;
@@ -63,12 +69,40 @@
 
 .container-haushaltsplan-kalender .element-haushaltsplan-kalender .aufgaben {
     font-size: 16px;
+    background-color: var(--headline-font-color);
+    padding: 0 5px 0 5px;
+    line-height: 22px;
+    border-radius: 6px;
+    margin-bottom: 10px;
 }
 
-.container-haushaltsplan-kalender .element-haushaltsplan-kalender .aufgaben ul {
-    list-style-type: none;
-}
-
-.container-haushaltsplan-kalender .element-haushaltsplan-kalender .aufgaben li {
+.container-haushaltsplan-kalender .element-haushaltsplan-kalender .aufgabenname {
     padding: 10px 0;
+    display: block;
+    color: white;
+}
+
+.container-haushaltsplan-kalender .element-haushaltsplan-kalender .aufgabenbuttons {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    justify-items: stretch;
+    padding-bottom: 10px;
+}
+
+.container-haushaltsplan-kalender .element-haushaltsplan-kalender .aufgabenbuttons form input[type="submit"] {
+    font-family: "Font Awesome 5 Free";
+    font-size: 16px;
+    font-weight: 900;
+    min-width: 50px;
+    max-width: 60px;
+    background-color: white;
+    border-radius: 6px;
+    color: var(--headline-font-color);
+}
+
+.container-haushaltsplan-kalender .element-haushaltsplan-kalender .aufgabenbuttons form input[type="submit"]:hover {
+    background-color: var(--headline-font-color);
+    color: white;
+    transition: background-color 0.2s;
+    transition: color 0.2s;
 }
