@@ -89,26 +89,6 @@
         return $tage;
     }
 
-    function getTasks($userId, $sortierung) {
-        $mysqli = dbConnect();
-
-        if ($sortierung === "alle") {
-            $statement = $mysqli->prepare("SELECT a.id AS id, a.name AS name, a.score AS score, a.aufwand AS aufwand, tasks.date AS datum, tasks.isDone AS isDone, tasks.id AS taskId FROM aufgaben AS a INNER JOIN tasks ON tasks.aufgabenId = a.id WHERE tasks.userId = ? ORDER BY tasks.date LIMIT 50");
-            $statement->bind_param("i", $userId);
-        } elseif ($sortierung === "offen" || $sortierung === "erledigt") {
-            $statement = $mysqli->prepare("SELECT a.id AS id, a.name AS name, a.score AS score, a.aufwand AS aufwand, tasks.date AS datum, tasks.isDone AS isDone, tasks.id AS taskId FROM aufgaben AS a INNER JOIN tasks ON tasks.aufgabenId = a.id WHERE tasks.userId = ? AND tasks.isDone = ? ORDER BY tasks.date LIMIT 50");
-            $isDone = ($sortierung == "offen") ? 0 : 1;
-            $statement->bind_param("ii", $userId, $isDone);
-        }
-
-        $statement->execute();
-        $result = $statement->get_result();
-        $aufgaben = $result->fetch_all(MYSQLI_ASSOC);
-        $statement->close();
-
-        return $aufgaben;
-    }
-
     function getTaskById($taskId) {
         $mysqli = dbConnect();
         
@@ -126,16 +106,29 @@
     function erledigeTaskById($taskId) {
         $mysqli = dbConnect();
 
-        $statement = $mysqli->prepare("UPDATE tasks SET isDone = 1 WHERE id = ?");
-        $statement->bind_param("i", $taskId);
-        $statement->execute();
-        $statement->close();
+        if($statement = $mysqli->prepare("UPDATE tasks SET isDone = 1 WHERE id = ?")){
+            $statement->bind_param("i", $taskId);
+            $statement->execute();
+            $statement->close();
+        } else {
+            return FALSE;
+        }
 
         return TRUE;
     }
 
     function aendereTaskDatumById($taskId, $neuesDatum) {
-        // write update statement
+        $mysqli = dbConnect();
+
+        if($statement = $mysqli->prepare("UPDATE tasks SET date = ? WHERE id = ?")){
+            $statement->bind_param("si", $neuesDatum, $taskId);
+            $statement->execute();
+            $statement->close();
+        } else {
+            return FALSE;
+        }
+
+        return TRUE;
     }
 
     function formatiereDatum($datum) {
@@ -146,6 +139,18 @@
     function formatiereDatumUndTag($datum) {
         $date = new DateTime($datum, new DateTimeZone('Europe/Berlin'));
         return $date->format('l') . ",<br>" . formatiereDatum($datum);
+    }
+
+    function datumEineWocheEher($datum) {
+        $date = new DateTime($datum, new DateTimeZone('Europe/Berlin'));
+        $date->modify('-7 days');
+        return $date->format("Y-m-d");
+    }
+
+    function datumEineWocheSpaeter($datum) {
+        $date = new DateTime($datum, new DateTimeZone('Europe/Berlin'));
+        $date->modify('+7 days');
+        return $date->format("Y-m-d");
     }
 
     function getWochenaufgaben($startdatum,$userId){
