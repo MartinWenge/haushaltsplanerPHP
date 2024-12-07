@@ -1,5 +1,5 @@
 <?php
-    require "databaseConnection.php";
+    require "functions.php";
 
     if (!isset($_POST['usernameNew'], $_POST['passwordNew'], $_POST['emailNew'], $_POST['birthdayNew'])) {
         exit('Please complete the registration form!');
@@ -9,30 +9,21 @@
         exit('Please complete the registration form');
     }
 
-    $mysqli = dbConnect();
+    $today = new DateTime();
+    $geburtstag = new DateTime($_POST['birthdayNew']);
+    if($today < $geburtstag) {
+        header("Location: ../login.php?notBorn=TRUE");
+    } else {
+        $accountData = getPasswortByUsername($_POST['usernameNew']);
 
-    if ($statement = $mysqli->prepare('SELECT id,password FROM accounts WHERE username = ?')) {
-        $statement->bind_param('s', $_POST['usernameNew']);
-        $statement->execute();
-        $statement->store_result();
-
-        if ($statement->num_rows > 0) {
-            echo 'Username exists, please choose another!';
-        } else {
-            if ($statement = $mysqli->prepare('INSERT INTO accounts (username, password, email, birthday) VALUES (?, ?, ?, ?)')) {
-                $password = password_hash($_POST['passwordNew'], PASSWORD_DEFAULT);
-                $statement->bind_param('ssss', $_POST['usernameNew'], $password, $_POST['emailNew'], $_POST['birthdayNew']);
-                $statement->execute();
-
+        if($accountData['userId'] == NULL) {
+            if(createNeuenAccount($_POST['usernameNew'], $accountData['passwort'], $_POST['emailNew'], $_POST['birthdayNew'])) {
                 header("Location: ../login.php?newAccount=" . $_POST['usernameNew']);
             } else {
-                echo 'Could not prepare statement!';
+                echo "Fehler beim erstellen des neuen Nutzers, probiere es noch einmal.";
             }
+        } else {
+            header("Location: ../login.php?existingUsername=" . $_POST['usernameNew']);
         }
-        $statement->close();
-    } else {
-        echo 'Could not prepare statement!';
     }
-
-    $mysqli->close();
 ?>

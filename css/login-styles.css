@@ -58,7 +58,7 @@
     transition: background-color 0.2s;
 }
 
-.neuerUserHinweis {
+.login-hinweis {
     color: black;
     padding: 10px 20px;
 }

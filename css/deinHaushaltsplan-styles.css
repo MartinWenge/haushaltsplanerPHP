@@ -1,74 +1,99 @@
-.inhaltsbereich .aufgabeHaushaltsplan {
-    color: black;
-    padding: 5px 20px;
-}
-
-.inhaltsbereich .aufgabeHaushaltsplan form {
-    display: inline-block;
-}
-
-.inhaltsbereich .aufgabeHaushaltsplan form input[type="submit"] {
+.navigation-woche {
+    background-color: var(--light-accent-color);
+    display: block;
     width: 200px;
-    background-color: lightgrey;
-    color: var(--headline-font-color);
-    padding: 1px 10px;
-    cursor: pointer;
-    font-size: 16px;
-    border-style: solid thin;
-    border-color: lightgrey;;
-    border-radius: 3px;
-    transition: background-color 0.2s;
-}
-
-.inhaltsbereich .aufgabeHaushaltsplan form input[type="submit"]:hover {
-    background-color: var(--headline-font-color);
-    border-color: var(--headline-font-color);
-    color: white;
-    transition: background-color 0.2s;
-}
-
-.istErledigtLabel {
-    width: 200px;
-    display: inline-block;
-    font-size: 16px;
+    height: 24px;
+    font-size: 20px;
+    color: var(--default-text-color);
+    margin: 20px 0 0 10px;
     text-align: center;
-    padding: 3px 0;
+    border-radius: 6px;
+}
+
+.navigation-woche a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.navigation-woche:hover {
     background-color: var(--headline-font-color);
-    border-style: solid thin;
-    border-color: var(--headline-font-color);
-    border-radius: 3px;
-    color: white;
+    color: var(--accent-color);
+    transition: background-color 0.1s;
+    transition: color 0.1s;
+}
+
+.viertel-drehung {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+    transform-origin: left;
+}
+
+.container-navigation-kalender {
+    display: grid;
+    grid-template-columns: 24px 1fr 24px;
+    column-gap: 10px;
 }
 
 .container-haushaltsplan-kalender {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    margin: 20px;
-    border-top: thin solid lightgray;
-    border-bottom: thin solid lightgray;
+    margin: 20px 0;
+    border-top: thin solid var(--light-accent-color);
+    border-bottom: thin solid var(--light-accent-color);
 }
 
 .container-haushaltsplan-kalender .element-haushaltsplan-kalender {
     padding: 10px;
     justify-self: stretch;
-    border-right: thin solid lightgray;
-    border-left: thin solid lightgray;
+    border-right: thin solid var(--light-accent-color);
+    border-left: thin solid var(--light-accent-color);
 }
 
 .container-haushaltsplan-kalender .element-haushaltsplan-kalender .datum {
     font-weight: bold;
     margin-bottom: 10px;
-    border-bottom: thin solid lightgray;
+    border-bottom: thin solid var(--light-accent-color);
 }
 
 .container-haushaltsplan-kalender .element-haushaltsplan-kalender .aufgaben {
     font-size: 16px;
+    background-color: var(--headline-font-color);
+    padding: 0 5px 0 5px;
+    line-height: 22px;
+    border-radius: 6px;
+    margin-bottom: 10px;
 }
 
-.container-haushaltsplan-kalender .element-haushaltsplan-kalender .aufgaben ul {
-    list-style-type: none;
-}
-
-.container-haushaltsplan-kalender .element-haushaltsplan-kalender .aufgaben li {
+.container-haushaltsplan-kalender .element-haushaltsplan-kalender .aufgabenname {
     padding: 10px 0;
+    display: block;
+    color: var(--accent-color);
+}
+
+.container-haushaltsplan-kalender .element-haushaltsplan-kalender .aufgabenbuttons {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    justify-items: stretch;
+    padding-bottom: 10px;
+}
+
+.container-haushaltsplan-kalender .element-haushaltsplan-kalender .aufgabenbuttons form input[type="submit"] {
+    font-family: "Font Awesome 5 Free";
+    font-size: 16px;
+    font-weight: 900;
+    min-width: 50px;
+    max-width: 60px;
+    background-color: var(--accent-color);
+    border-radius: 6px;
+    color: var(--headline-font-color);
+}
+
+.container-haushaltsplan-kalender .element-haushaltsplan-kalender .aufgabenbuttons form input[type="submit"]:hover {
+    background-color: var(--headline-font-color);
+    color: var(--accent-color);
+    transition: background-color 0.2s;
+    transition: color 0.2s;
 }

@@ -4,4 +4,8 @@
     --footer-bg-color: var(--headline-font-color);
     --nonstandard-text-font-color: darkolivegreen;
     --highlight-nav-link-font-color: var(--nonstandard-text-font-color);
+
+    --light-accent-color: lightgray;
+    --accent-color: white;
+    --default-text-color: black;
 }

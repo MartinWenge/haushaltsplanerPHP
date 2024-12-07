@@ -91,10 +91,10 @@
             <div class="formbox">
                 <div class="accountinfo-ueberschrift">Passwort ändern</div>
                 <form action="php/changeAccountInfo.php" method="post">
-                    <label for="passwordAlt">
+                    <label for="password">
                         <i class="fas fa-lock-open"></i>
                     </label>
-                    <input type="password" name="passwordAlt" placeholder="altes Passwort" id="passwordAlt" required>
+                    <input type="password" name="password" placeholder="altes Passwort" id="password" required>
                     <label for="passwordNeu">
                         <i class="fas fa-lock"></i>
                     </label>

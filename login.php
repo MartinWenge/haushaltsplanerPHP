@@ -1,8 +1,22 @@
 <?php 
+    $newAccount = FALSE;
     if(isset($_GET['newAccount'])){
         $newAccount = TRUE;
-    }else{
-        $newAccount = FALSE;
+    }
+
+    $existingUsername = FALSE;
+    if(isset($_GET['existingUsername'])){
+        $existingUsername = TRUE;
+    }
+
+    $unauthorized = FALSE;
+    if(isset($_GET['unauthorized'])){
+        $unauthorized = TRUE;
+    }
+
+    $notBorn = FALSE;
+    if(isset($_GET['notBorn'])){
+        $notBorn = TRUE;
     }
 ?>
 
@@ -25,8 +39,26 @@
         <div class="login">
             
             <?php if($newAccount): ?>
-                <div class="neuerUserHinweis">
+                <div class="login-hinweis">
                     Willkommen <?=htmlspecialchars($_GET['newAccount'], ENT_QUOTES)?>, du kannst dich jetzt mit deinen Zugangsdaten einloggen.
+                </div>
+            <?php endif; ?>
+
+            <?php if($existingUsername): ?>
+                <div class="login-hinweis">
+                    Dein gewählter Username <b><?=htmlspecialchars($_GET['existingUsername'], ENT_QUOTES)?></b> ist bereits vergeben, bitte wähle einen anderen.
+                </div>
+            <?php endif; ?>
+
+            <?php if($unauthorized): ?>
+                <div class="login-hinweis">
+                    Nutzername oder Passwort nicht korrekt, bitte versuche es erneut.
+                </div>
+            <?php endif; ?>
+
+            <?php if($notBorn): ?>
+                <div class="login-hinweis">
+                    Dein Geburtstag liegt in der Zukunft, das kann nicht sein...
                 </div>
             <?php endif; ?>
 
