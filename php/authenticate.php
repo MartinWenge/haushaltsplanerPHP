@@ -2,29 +2,21 @@
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
     }
-    require "databaseConnection.php";
-
-    $mysqli = dbConnect();
+    require "functions.php";
 
     if ( !isset($_POST['username'], $_POST['password']) ) {
         exit('Please fill both the username and password fields!');
     }
 
-    $statement = $mysqli->prepare('SELECT id, password FROM accounts WHERE username = ?');
-    $statement->bind_param('s', $_POST['username']);
-    $statement->execute();
-    $statement->store_result();
+    $accountData = getPasswortByUsername($_POST['username']);
 
-    if ($statement->num_rows > 0) {
-        $statement->bind_result($id, $password);
-        $statement->fetch();
-
-        if (password_verify($_POST['password'], $password)) {
+    if ($accountData['userId'] != NULL) {
+        if (password_verify($_POST['password'], $accountData['passwort'])) {
             session_regenerate_id();
             // don' set login flag here, go for 2FA
             $_SESSION['loggedin'] = NULL;
             $_SESSION['name'] = $_POST['username'];
-            $_SESSION['userId'] = $id;
+            $_SESSION['userId'] = $accountData['userId'];
 
             // go to 2FA page
             header("Location: ../2fapage.php");
@@ -36,6 +28,4 @@
     } else {
         echo 'Incorrect username and/or password!';
     }
-
-    $statement->close();
 ?>

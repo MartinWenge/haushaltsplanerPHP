@@ -48,6 +48,52 @@
         return $userInfoArray[0];
     }
 
+    function getPasswortByUsername($username){
+        $mysqli = dbConnect();
+
+        $statement = $mysqli->prepare('SELECT id, password FROM accounts WHERE username = ?');
+        $statement->bind_param('s', $username);
+        $statement->execute();
+        $statement->store_result();
+
+        if ($statement->num_rows > 0) {
+            $statement->bind_result($id, $password);
+            $statement->fetch();
+            $statement->close();
+            return array('userId'=>$id, 'passwort'=>$password);
+        } else {
+            return array('userId'=>NULL, 'passwort'=>NULL);
+        }
+    }
+
+    function getGeburtstagByUserId($userId){
+        $mysqli = dbConnect();
+
+        $statement = $mysqli->prepare("SELECT birthday FROM accounts WHERE id = ?");
+        $statement-> bind_param("i", $userId);
+        $statement->execute();
+        $statement->store_result();
+        $statement->bind_result($birthday);
+        $statement->fetch();
+        $statement->close();
+
+        return $birthday;
+    }
+
+    function createNeuenAccount($username, $passwort, $email, $geburtstag) {
+        $mysqli = dbConnect();
+
+        if ($statement = $mysqli->prepare('INSERT INTO accounts (username, password, email, birthday) VALUES (?, ?, ?, ?)')) {
+            $password = password_hash($passwort, PASSWORD_DEFAULT);
+            $statement->bind_param('ssss', $username, $password, $email, $geburtstag);
+            $statement->execute();
+            $statement->close();
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+
     function getAufgabeById($aufgabenId) {
         $mysqli = dbConnect();
 
