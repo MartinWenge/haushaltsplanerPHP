@@ -9,15 +9,21 @@
         exit('Please complete the registration form');
     }
 
-    $accountData = getPasswortByUsername($_POST['usernameNew']);
-
-    if($accountData['userId'] == NULL) {
-        if(createNeuenAccount($_POST['usernameNew'], $accountData['passwort'], $_POST['emailNew'], $_POST['birthdayNew'])) {
-            header("Location: ../login.php?newAccount=" . $_POST['usernameNew']);
-        } else {
-            echo "Fehler beim erstellen des neuen Nutzers, probiere es noch einmal.";
-        }
+    $today = new DateTime();
+    $geburtstag = new DateTime($_POST['birthdayNew']);
+    if($today < $geburtstag) {
+        header("Location: ../login.php?notBorn=TRUE");
     } else {
-        echo 'Username exists, please choose another!';
+        $accountData = getPasswortByUsername($_POST['usernameNew']);
+
+        if($accountData['userId'] == NULL) {
+            if(createNeuenAccount($_POST['usernameNew'], $accountData['passwort'], $_POST['emailNew'], $_POST['birthdayNew'])) {
+                header("Location: ../login.php?newAccount=" . $_POST['usernameNew']);
+            } else {
+                echo "Fehler beim erstellen des neuen Nutzers, probiere es noch einmal.";
+            }
+        } else {
+            header("Location: ../login.php?existingUsername=" . $_POST['usernameNew']);
+        }
     }
 ?>

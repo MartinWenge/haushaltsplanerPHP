@@ -23,9 +23,9 @@
         } else {
             session_regenerate_id();
             $_SESSION['loggedin'] = NULL;
-            echo 'Incorrect username and/or password!';
+            header("Location: ../login.php?unauthorized=TRUE");
         }
     } else {
-        echo 'Incorrect username and/or password!';
+        header("Location: ../login.php?unauthorized=TRUE");
     }
 ?>
