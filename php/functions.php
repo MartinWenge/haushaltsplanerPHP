@@ -3,7 +3,7 @@
 
     function getKategorien(){
         $mysqli = dbConnect();
-        $result = $mysqli->query("select distinct kategorie from aufgaben");
+        $result = $mysqli->query("SELECT DISTINCT kategorie FROM aufgaben");
         while($row = $result->fetch_assoc()){
             $kategorien[] = $row;
         }
@@ -12,7 +12,7 @@
 
     function getAlleAufgaben(){
         $mysqli = dbConnect();
-        $result = $mysqli->query("select a.id as id, a.name as name, a.bild as bild, a.beschreibung as beschreibung, a.score as score, a.aufwand as aufwand, lh.name as haeufigkeit from aufgaben as a INNER JOIN lookuphaeufigkeit as lh on a.haeufigkeit = lh.id order by rand() limit 50");
+        $result = $mysqli->query("SELECT a.id AS id, a.name AS name, a.bild AS bild, a.beschreibung AS beschreibung, a.score AS score, a.aufwand AS aufwand, lh.name AS haeufigkeit FROM aufgaben AS a INNER JOIN lookuphaeufigkeit AS lh ON a.haeufigkeit = lh.id ORDER BY rand() LIMIT 50");
         while($row = $result->fetch_assoc()){
             $aufgaben[] = $row;
         }
@@ -22,7 +22,7 @@
     function getAufgabenNachKategorie($kategorie){
         $mysqli = dbConnect();
 
-        $statement = $mysqli->prepare("select a.id as id, a.name as name, a.bild as bild, a.beschreibung as beschreibung, a.score as score, a.aufwand as aufwand, lh.name as haeufigkeit from aufgaben as a INNER JOIN lookuphaeufigkeit as lh on a.haeufigkeit = lh.id where a.kategorie = ? limit 50");
+        $statement = $mysqli->prepare("SELECT a.id AS id, a.name AS name, a.bild AS bild, a.beschreibung AS beschreibung, a.score AS score, a.aufwand AS aufwand, lh.name AS haeufigkeit FROM aufgaben AS a INNER JOIN lookuphaeufigkeit AS lh ON a.haeufigkeit = lh.id WHERE a.kategorie = ? LIMIT 50");
         $statement->bind_param("s",$kategorie);
 
         $statement->execute();
@@ -51,7 +51,7 @@
     function getAufgabeById($aufgabenId) {
         $mysqli = dbConnect();
 
-        $statement = $mysqli->prepare("select a.id as id, a.name as name, a.bild as bild, a.beschreibung as beschreibung, a.score as score, a.aufwand as aufwand, lh.name as haeufigkeit from aufgaben as a INNER JOIN lookuphaeufigkeit as lh on a.haeufigkeit = lh.id where a.id = ? limit 50");
+        $statement = $mysqli->prepare("SELECT a.id AS id, a.name AS name, a.bild AS bild, a.beschreibung AS beschreibung, a.score AS score, a.aufwand AS aufwand, lh.name AS haeufigkeit FROM aufgaben AS a INNER JOIN lookuphaeufigkeit AS lh ON a.haeufigkeit = lh.id WHERE a.id = ? LIMIT 50");
         $statement->bind_param("i",$aufgabenId);
 
         $statement->execute();
