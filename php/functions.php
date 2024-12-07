@@ -51,7 +51,7 @@
     function getPasswortByUsername($username){
         $mysqli = dbConnect();
 
-        $statement = $mysqli->prepare('SELECT id, password FROM accounts WHERE username = ?');
+        $statement = $mysqli->prepare('SELECT id, password FROM accounts WHERE username = ? LIMIT 1');
         $statement->bind_param('s', $username);
         $statement->execute();
         $statement->store_result();
@@ -63,6 +63,60 @@
             return array('userId'=>$id, 'passwort'=>$password);
         } else {
             return array('userId'=>NULL, 'passwort'=>NULL);
+        }
+    }
+
+    function getPasswortByUserId($userId) {
+        $mysqli = dbConnect();
+
+        $statement = $mysqli->prepare('SELECT password FROM accounts WHERE id = ? LIMIT 1');
+        $statement->bind_param('i', $userId);
+        $statement->execute();
+        $statement->store_result();
+
+        if ($statement->num_rows > 0) {
+            $statement->bind_result($password);
+            $statement->fetch();
+            $statement->close();
+            return $password;
+        } else {
+            return NULL;
+        }
+    }
+
+    function setNeuesPasswortByUserId($userId, $neuesPasswort) {
+        $mysqli = dbConnect();
+
+        if($statement = $mysqli->prepare('UPDATE accounts SET password = ? WHERE id = ?')){
+            $passwordNew = password_hash($neuesPasswort, PASSWORD_DEFAULT);
+            $statement->bind_param('si', $passwordNew, $userId);
+            $statement->execute();
+            $statement->close();
+
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+
+    function deleteAccountByUserId($userId) {
+        $mysqli = dbConnect();
+
+        if($statement = $mysqli->prepare('DELETE FROM tasks WHERE userId = ?')) {
+            $statement->bind_param('i', $userId);
+            $statement->execute();
+
+            if($statement = $mysqli->prepare('DELETE FROM accounts WHERE id = ?')) {
+                $statement->bind_param('i', $userId);
+                $statement->execute();
+                $statement->close();
+
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            return FALSE;
         }
     }
 
