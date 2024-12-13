@@ -1,0 +1,72 @@
+.neue-aufgabe-anlegen {
+    width: 700px;
+    box-shadow: 0 0 9px 0 lightslategray;
+    background-color: white;
+    margin: 40px 50%;
+}
+
+.neue-aufgabe-anlegen .neue-aufgabe-ueberschrift {
+    color: var(--headline-font-color);
+    padding: 10px 20px 0 20px;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.neue-aufgabe-anlegen .formBeschreibung {
+    padding: 10px 20px 0 20px;
+    font-size: 18px;
+    color: var(--headline-font-color);
+    width: 700px;
+}
+
+.neue-aufgabe-anlegen form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+.neue-aufgabe-anlegen form label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    background-color: var(--headline-font-color);
+    color: white;
+}
+
+.neue-aufgabe-anlegen form input[type="text"],
+.neue-aufgabe-anlegen form input[type="number"] {
+    width: 590px;
+    height: 50px;
+    border: 1px thin darkgrey;
+    margin: 0 20px 10px 0;
+    padding: 0 15px;
+}
+
+.neue-aufgabe-anlegen form select {
+    width: 590px;
+    height: 50px;
+    border: 1px thin darkgrey;
+    margin: 0 20px 10px 0;
+    padding: 0 15px;
+}
+
+.neue-aufgabe-anlegen form input[type="submit"] {
+    width: 100%;
+    padding: 15px;
+    margin: 0px 40px 0px 20px;
+    background-color: var(--headline-font-color);
+    border: 0;
+    cursor: pointer;
+    color: white;
+    font-size: 16px;
+    transition: background-color 0.2s;
+}
+
+.neue-aufgabe-anlegen form input[type="submit"]:hover {
+    background-color: lightgrey;
+    color: var(--headline-font-color);
+    transition: background-color 0.2s;
+}

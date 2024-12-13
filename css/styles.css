@@ -7,9 +7,10 @@
 @import url("main-styles.css");
 @import url("login-styles.css");
 @import url("accountinfo-styles.css");
-@import url("planeAugabeEin-styles.css");
+@import url("planeAufgabeEin-styles.css");
 @import url("deinHaushaltsplan-styles.css");
 @import url("2fa-styles.css");
+@import url("neueAufgabeAnlegen-styles.css");
 
 *{
     margin: 0;

@@ -279,4 +279,14 @@
 
         return $aufgaben;
     }
+
+    function getListeHaeufigkeit() {
+        $mysqli = dbConnect();
+
+        $result = $mysqli->query("SELECT id, name, days FROM lookuphaeufigkeit ORDER BY days LIMIT 20");
+        while($row = $result->fetch_assoc()){
+            $haeufigkeiten[] = $row;
+        }
+        return $haeufigkeiten;
+    }
 ?>

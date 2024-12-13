@@ -47,6 +47,7 @@
 
 .container-haushaltsplan-kalender .element-haushaltsplan-kalender {
     padding: 10px;
+    min-height: 220px;
     justify-self: stretch;
     border-right: thin solid var(--light-accent-color);
     border-left: thin solid var(--light-accent-color);
