@@ -1,8 +1,16 @@
 .neue-aufgabe-anlegen {
     width: 700px;
     box-shadow: 0 0 9px 0 lightslategray;
-    background-color: white;
+    background-color: var(--accent-color);
     margin: 40px 50%;
+}
+
+.neue-aufgabe-anlegen .submit-message {
+    border: solid 2px var(--light-accent-color);
+    margin: 20px 40px 20px 20px;
+    padding: 20px;
+    color: var(--alert-color);
+    font-weight: bold;
 }
 
 .neue-aufgabe-anlegen .neue-aufgabe-ueberschrift {
@@ -33,18 +41,12 @@
     width: 50px;
     height: 50px;
     background-color: var(--headline-font-color);
-    color: white;
+    color: var(--accent-color);
 }
 
 .neue-aufgabe-anlegen form input[type="text"],
-.neue-aufgabe-anlegen form input[type="number"] {
-    width: 590px;
-    height: 50px;
-    border: 1px thin darkgrey;
-    margin: 0 20px 10px 0;
-    padding: 0 15px;
-}
-
+.neue-aufgabe-anlegen form input[type="number"],
+.neue-aufgabe-anlegen form input[type="file"],
 .neue-aufgabe-anlegen form select {
     width: 590px;
     height: 50px;
@@ -60,7 +62,7 @@
     background-color: var(--headline-font-color);
     border: 0;
     cursor: pointer;
-    color: white;
+    color: var(--accent-color);
     font-size: 16px;
     transition: background-color 0.2s;
 }

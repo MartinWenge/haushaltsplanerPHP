@@ -1,7 +1,7 @@
 .aufgabenbeschreibung {
     width: 600px;
     box-shadow: 0 0 9px 0 lightslategray;
-    background-color: white;
+    background-color: var(--accent-color);
     margin: 40px 50%;
 }
 
@@ -39,7 +39,7 @@
     width: 50px;
     height: 50px;
     background-color: var(--headline-font-color);
-    color: white;
+    color: var(--accent-color);
 }
 
 .aufgabenbeschreibung form input[type="number"],
@@ -58,7 +58,7 @@
     background-color: var(--headline-font-color);
     border: 0;
     cursor: pointer;
-    color: white;
+    color: var(--accent-color);
     font-size: 16px;
     transition: background-color 0.2s;
 }
