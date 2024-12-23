@@ -8,6 +8,26 @@ if (!isset($_SESSION['loggedin'])) {
 	header('Location:login.php');
 	exit;
 }
+
+    $incompleteForm = FALSE;
+    if(isset($_GET['incompleteForm'])){
+        $incompleteForm = TRUE;
+    }
+
+    $directCall = FALSE;
+    if(isset($_GET['directCall'])){
+        $directCall = TRUE;
+    }
+
+    $imageError = FALSE;
+    if(isset($_GET['imageError'])){
+        $imageError = TRUE;
+    }
+
+    $databaseError = FALSE;
+    if(isset($_GET['databaseError'])){
+        $databaseError = TRUE;
+    }
 ?>
 
 <DOCTYPE html>
@@ -27,9 +47,34 @@ if (!isset($_SESSION['loggedin'])) {
     
     <main>
         <div class="neue-aufgabe-anlegen">
+
+            <?php if($incompleteForm): ?>
+                <div class="submit-message">
+                    Bitte fülle alle Felder des Formulars aus.
+                </div>
+            <?php endif; ?>
+
+            <?php if($directCall): ?>
+                <div class="submit-message">
+                    Bitte lege eine neue Aufgabe nur über das Eingabeformular an.
+                </div>
+            <?php endif; ?>
+
+            <?php if($imageError): ?>
+                <div class="submit-message">
+                    Fehler beim Bildupload. Bitte nutze ein png oder jpg mit maximal 500kB Größe.
+                </div>
+            <?php endif; ?>
+
+            <?php if($databaseError): ?>
+                <div class="submit-message">
+                    Fehler beim anlegen der Aufgabe in der Datenbank. Hast du ungewöhnliche Zeichen benutzt?
+                </div>
+            <?php endif; ?>
+
             <div class="aufgbeschr-ueberschrift">Lege eine neue Aufgabe an:</div>
 
-            <form action="php/neueAufgabe.php" method="post">
+            <form action="php/neueAufgabe.php" method="post" enctype="multipart/form-data">
                 <label for="name">
                     <i class="fas fa-comment"></i>
                 </label>
@@ -71,10 +116,9 @@ if (!isset($_SESSION['loggedin'])) {
 
                 <div class="formBeschreibung">Suche ein passendes Bild heraus.</div>
                 <label for="bild">
-                    <i class="fas fa-comments"></i>
+                    <i class="fas fa-file-image"></i>
                 </label>
-                <input type="text" name="bild" placeholder="Pfad zum Bild" id="bild" required>
-
+                <input type="file" name="bild" placeholder="Pfad zum Bild" id="bild" required>
 
                 <input type="submit" value="Aufgabe anlegen">
             </form>

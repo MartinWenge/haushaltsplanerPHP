@@ -289,4 +289,26 @@
         }
         return $haeufigkeiten;
     }
+
+    function createNeueAufgabe($name, $haeufigkeit, $beschreibung, $score, $aufwand, $bild, $kategorie) {
+        $mysqli = dbConnect();
+
+        if($statement = $mysqli->prepare("INSERT INTO aufgaben (name, haeufigkeit, beschreibung, score, aufwand, bild, kategorie) VALUES (?, ?, ?, ?, ?, ?, ?)")){
+            $statement->bind_param("sisiiss", $name, $haeufigkeit, $beschreibung, $score, $aufwand, $bild, $kategorie);
+            $statement->execute();
+
+            $statement = $mysqli->prepare("SELECT id FROM aufgaben WHERE name = ? ORDER BY id DESC LIMIT 1");
+            $statement->bind_param("s",$name);
+
+            $statement->execute();
+            $statement->store_result();
+            $statement->bind_result($aufgabenId);
+            $statement->fetch();
+            
+            $statement->close();
+            return $aufgabenId;
+        } else {
+            return FALSE;
+        }
+    }
 ?>
