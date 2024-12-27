@@ -2,7 +2,7 @@
     require "functions.php";
 
     if ( !isset($_POST['startdatum'],$_POST['ansicht']) ) {
-        exit('kein Datum angegeben!');
+        exit('kein Ansichtsmodus oder Datum angegeben!');
     }
     
     if($_POST['ansicht']){

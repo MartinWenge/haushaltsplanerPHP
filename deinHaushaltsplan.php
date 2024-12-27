@@ -138,6 +138,8 @@
                                                 <div>
                                                     <form action="php/aufgabeErledigt.php" method="post">
                                                         <input type="hidden" id="taskId" name="taskId" value="<?=$aufgabe['id']?>">
+                                                        <input type="hidden" id="ansicht1" name="ansicht" value="<?=$wochenplan?>">
+                                                        <input type="hidden" id="startdatum1" name="startdatum" value="<?=$startdatum?>">
                                                         <input type="submit" name="submit" id="submit" value="&#xf00c;">
                                                     </form>
                                                 </div>
