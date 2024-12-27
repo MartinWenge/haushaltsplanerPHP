@@ -237,8 +237,12 @@
     }
 
     function formatiereDatumUndTag($datum) {
-        $date = new DateTime($datum, new DateTimeZone('Europe/Berlin'));
-        return $date->format('l') . ",<br>" . formatiereDatum($datum);
+        if($datum != ""){
+            $date = new DateTime($datum, new DateTimeZone('Europe/Berlin'));
+            return $date->format('l') . ",<br>" . formatiereDatum($datum);
+        }else{
+            return "";
+        }
     }
 
     function datumEineWocheEher($datum) {
@@ -253,6 +257,18 @@
         return $date->format("Y-m-d");
     }
 
+    function ersterEinMonatEher($datum) {
+        $date = new DateTime($datum, new DateTimeZone('Europe/Berlin'));
+        $date->modify('first day of last month');
+        return $date->format("Y-m-d");
+    }
+
+    function ersterEinMonatSpaeter($datum) {
+        $date = new DateTime($datum, new DateTimeZone('Europe/Berlin'));
+        $date->modify('first day of next month');
+        return $date->format("Y-m-d");
+    }
+
     function getWochenaufgaben($startdatum,$userId){
         $datum = new DateTime($startdatum, new DateTimeZone('Europe/Berlin'));
 
@@ -264,6 +280,60 @@
             $wochenaufgaben[] = $day;
         }
         return $wochenaufgaben;
+    }
+
+    function getMonatsaufgaben($startdatum,$userId) {
+        $startTagMonat = new DateTime($startdatum, new DateTimeZone('Europe/Berlin'));
+        $startTagMonat->modify('first day of');
+        $endTagMonat = new DateTime($startdatum, new DateTimeZone('Europe/Berlin'));
+        $endTagMonat->modify('last day of');
+
+        $endday = (int)$endTagMonat->format("d");
+        $WochentagNummer = $startTagMonat->format("w");
+        switch($WochentagNummer){
+            case '2':
+                $monatsaufgaben[] = array('datum' => "", 'aufgaben' => []);
+                break;
+            case '3':
+                $monatsaufgaben[] = array('datum' => "", 'aufgaben' => []);
+                $monatsaufgaben[] = array('datum' => "", 'aufgaben' => []);
+                break;
+            case '4':
+                $monatsaufgaben[] = array('datum' => "", 'aufgaben' => []);
+                $monatsaufgaben[] = array('datum' => "", 'aufgaben' => []);
+                $monatsaufgaben[] = array('datum' => "", 'aufgaben' => []);
+                break;
+            case '5':
+                $monatsaufgaben[] = array('datum' => "", 'aufgaben' => []);
+                $monatsaufgaben[] = array('datum' => "", 'aufgaben' => []);
+                $monatsaufgaben[] = array('datum' => "", 'aufgaben' => []);
+                $monatsaufgaben[] = array('datum' => "", 'aufgaben' => []);
+                break;
+            case '6':
+                $monatsaufgaben[] = array('datum' => "", 'aufgaben' => []);
+                $monatsaufgaben[] = array('datum' => "", 'aufgaben' => []);
+                $monatsaufgaben[] = array('datum' => "", 'aufgaben' => []);
+                $monatsaufgaben[] = array('datum' => "", 'aufgaben' => []);
+                $monatsaufgaben[] = array('datum' => "", 'aufgaben' => []);
+                break;
+            case '0':
+                $monatsaufgaben[] = array('datum' => "", 'aufgaben' => []);
+                $monatsaufgaben[] = array('datum' => "", 'aufgaben' => []);
+                $monatsaufgaben[] = array('datum' => "", 'aufgaben' => []);
+                $monatsaufgaben[] = array('datum' => "", 'aufgaben' => []);
+                $monatsaufgaben[] = array('datum' => "", 'aufgaben' => []);
+                $monatsaufgaben[] = array('datum' => "", 'aufgaben' => []);
+                break;
+        }
+
+        for($i = 0; $i < $endday; $i++){
+            $aufgaben = getActiveTasksByDatumUndUser($startTagMonat->format("Y-m-d"), $userId);
+            $day = array('datum' => $startTagMonat->format("Y-m-d"), 'aufgaben' => $aufgaben);
+
+            $startTagMonat->modify('+1 day');
+            $monatsaufgaben[] = $day;
+        }
+        return $monatsaufgaben;
     }
 
     function getActiveTasksByDatumUndUser($datum, $userId){
