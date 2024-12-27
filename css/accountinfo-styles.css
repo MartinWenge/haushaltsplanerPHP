@@ -3,7 +3,7 @@
     padding:10px 20px;
     margin: 40px 100%;
     box-shadow: 0 0 9px 0 lightslategray;
-    background-color: white;
+    background-color: var(--accent-color);
 }
 
 .accountinfo-ueberschrift {
@@ -30,7 +30,7 @@
     width: 40px;
     height: 40px;
     background-color: var(--headline-font-color);
-    color: white;
+    color: var(--accent-color);
 }
 
 .infobox {
@@ -63,7 +63,7 @@
     width: 50px;
     height: 50px;
     background-color: var(--headline-font-color);
-    color: white;
+    color: var(--accent-color);
 }
 
 .accountinfo form input[type="password"] {
@@ -80,7 +80,7 @@
     background-color: var(--headline-font-color);
     border: 0;
     cursor: pointer;
-    color: white;
+    color: var(--accent-color);
     font-size: 16px;
     transition: background-color 0.2s;
 }

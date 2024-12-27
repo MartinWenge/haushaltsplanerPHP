@@ -39,7 +39,17 @@
         </div>
 
         <div class="inhaltsbereich">
-            <div class="menue-ueberschrift">Mögliche Aufgaben</div>
+            <div class="menue-ueberschrift-container">
+                <div class="menue-ueberschrift">Mögliche Aufgaben</div>
+                <?php if($isLoggedIn): ?>
+                    <div class="menue-button">
+                        <form action="neueAufgabeAnlegen.php" method="post">
+                            <input type="submit" name="submit" id="submit" value="neue Aufgabe anlegen">
+                        </form>
+                    </div>
+                <?php endif; ?>
+            </div>
+            
             <?php $aufgaben = getAlleAufgaben() ?>
             <?php foreach($aufgaben as $aufgabe): ?>
                 <?php if($isLoggedIn): ?>

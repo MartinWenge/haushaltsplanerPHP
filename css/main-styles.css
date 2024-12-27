@@ -5,15 +5,45 @@ main {
     padding: 0px 20px 0px 20px;
 }
 
+.menue-ueberschrift-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+}
+
 .menue-ueberschrift {
     color: var(--headline-font-color);
     margin-bottom: 10px;
     font-size: 18px;
     font-weight: bold;
+    justify-self: start;
+}
+
+.menue-button {
+    justify-self: end;
+    margin-bottom: 10px;
+}
+
+.menue-button form input[type="submit"] {
+    background-color: var(--headline-font-color);
+    color: var(--accent-color);
+    padding: 10px;
+    min-width: 200px;
+    border: solid thin var(--light-accent-color);
+    border-radius: 6px;
+    text-align: center;
+}
+
+.menue-button form input[type="submit"]:hover {
+    background-color: var(--light-accent-color);
+    color: var(--headline-font-color);
+    transition: background-color 0.2s;
+    transition: color 0.2s;
+    border: solid thin var(--headline-font-color);
 }
 
 .seitenmenue {
-    border-right: thin solid lightgray;
+    border-right: thin solid var(--light-accent-color);
     padding-right: 20px;
 }
 
@@ -48,7 +78,7 @@ main {
 }
 
 .aufgabe:hover {
-    background-color: lightgray;
+    background-color: var(--light-accent-color);
     border-radius: 8px;
     transition: ease-in 0.2s;
 }

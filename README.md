@@ -9,9 +9,10 @@ Der Haushaltsplaner ist eine PHP basierte Webapp, vor allem um mit PHP vertraute
 Hier eine kleine Impression der Startseite, wie sie für einen angemeldeten Nutzer aussieht:
 ![Impression Startseite](figures/startseiteImpression.png)
 
+Sind ein paar Aufgaben eingeplant, sieht die Monatsübersicht etwa so aus:
+![Impression Monatsübersicht](figures/monatsplanImpression.png)
+
 ## Wie kann man die Anwendung benutzen?
 Für die Entwicklung verwende ich xampp, insbesondere den Apache Server und die Mysql Datenbank. Um die Anwendung einfach mal zu starten, reicht es einen Apache Webserver zu starten und das Hauptverzeichnis des Repositories als root-Verzeichnis für den Server zu setzen.
 
-Um einige Beispieldaten aus der Datenbank für die dynamische Inhaltsanzeige zu laden, kann das SQL Skript [haushaltsplaner_dump.sql](haushaltsplaner_dump.sql) in einen aktiven MYSQL oder MariaDB Server importiert werden. Damit wird die Webanwendung wesentlich nützlicher ;-)
-
-Grundsätzlich ist die Anwendung auch kontaineriserbar, so läuft sie auch bei lokal auf meinem kleinen Homeserver mit je einem Container für den Apache Server mit PHP und einem Container für die Datenbank. Dazu finden sich einige Anleitungen im Web.
+Um einige Beispieldaten aus der Datenbank für die dynamische Inhaltsanzeige zu laden, kann das SQL Skript [haushaltsplaner_dump.sql](haushaltsplaner_dump.sql) in einen aktiven MYSQL oder MariaDB Server importiert werden. Damit wird die Webanwendung wesentlich hübscher ;-)

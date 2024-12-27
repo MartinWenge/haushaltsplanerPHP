@@ -1,3 +1,69 @@
+.auswahl-ansicht {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 30px;
+}
+
+.auswahl-ansicht a {
+    text-decoration: none;
+    border: solid thin var(--light-accent-color);
+    border-radius: 6px;
+    padding: 10px;
+    margin: 10px 20px;
+    text-align: center;
+    color: var(--headline-font-color);
+    font-weight: bold;
+    font-size: 22;
+    width: 300px;
+    justify-self: center;
+    height: 50px;
+}
+
+.auswahl-ansicht a:hover {
+    background-color: var(--headline-font-color);
+    color: var(--accent-color);
+    transition: color 0.2s;
+    transform: background-color 0.2s;
+}
+
+.auswahl-ansicht .auswahl-startdatum {
+    justify-self: center;
+}
+
+.auswahl-ansicht form {
+    padding: 10px;
+    margin: 10px 20px;
+    border: solid thin var(--light-accent-color);
+    border-radius: 6px;
+    height: 50px;
+}
+
+.auswahl-ansicht form input[type="submit"]{
+    font-family: "Font Awesome 5 Free";
+    font-size: 35px;
+    font-weight: 900;
+    width: 40px;
+    background-color: var(--accent-color);
+    border-radius: 6px;
+    color: var(--headline-font-color);
+    transform: translateY(-7px);
+}
+
+.auswahl-ansicht form input[type="submit"]:hover{
+    background-color: var(--headline-font-color);
+    color: var(--accent-color);
+    transition: background-color 0.2s;
+    transition: color 0.2s;
+}
+
+.auswahl-ansicht form input[type="date"]{
+    width: 160px;
+    height: 40px;
+    border: none;
+    padding: 0 15px;
+    transform: translateY(-15px);
+}
+
 .navigation-woche {
     background-color: var(--light-accent-color);
     display: block;
@@ -35,18 +101,23 @@
     display: grid;
     grid-template-columns: 24px 1fr 24px;
     column-gap: 10px;
+    margin-bottom: 20px;
 }
 
 .container-haushaltsplan-kalender {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    margin: 20px 0;
     border-top: thin solid var(--light-accent-color);
     border-bottom: thin solid var(--light-accent-color);
 }
 
+.container-navigation-kalender .top-margin {
+    margin-top: 20px;
+}
+
 .container-haushaltsplan-kalender .element-haushaltsplan-kalender {
     padding: 10px;
+    min-height: 220px;
     justify-self: stretch;
     border-right: thin solid var(--light-accent-color);
     border-left: thin solid var(--light-accent-color);

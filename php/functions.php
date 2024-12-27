@@ -237,8 +237,12 @@
     }
 
     function formatiereDatumUndTag($datum) {
-        $date = new DateTime($datum, new DateTimeZone('Europe/Berlin'));
-        return $date->format('l') . ",<br>" . formatiereDatum($datum);
+        if($datum != ""){
+            $date = new DateTime($datum, new DateTimeZone('Europe/Berlin'));
+            return $date->format('l') . ",<br>" . formatiereDatum($datum);
+        }else{
+            return "";
+        }
     }
 
     function datumEineWocheEher($datum) {
@@ -250,6 +254,18 @@
     function datumEineWocheSpaeter($datum) {
         $date = new DateTime($datum, new DateTimeZone('Europe/Berlin'));
         $date->modify('+7 days');
+        return $date->format("Y-m-d");
+    }
+
+    function ersterEinMonatEher($datum) {
+        $date = new DateTime($datum, new DateTimeZone('Europe/Berlin'));
+        $date->modify('first day of last month');
+        return $date->format("Y-m-d");
+    }
+
+    function ersterEinMonatSpaeter($datum) {
+        $date = new DateTime($datum, new DateTimeZone('Europe/Berlin'));
+        $date->modify('first day of next month');
         return $date->format("Y-m-d");
     }
 
@@ -266,6 +282,60 @@
         return $wochenaufgaben;
     }
 
+    function getMonatsaufgaben($startdatum,$userId) {
+        $startTagMonat = new DateTime($startdatum, new DateTimeZone('Europe/Berlin'));
+        $startTagMonat->modify('first day of');
+        $endTagMonat = new DateTime($startdatum, new DateTimeZone('Europe/Berlin'));
+        $endTagMonat->modify('last day of');
+
+        $endday = (int)$endTagMonat->format("d");
+        $WochentagNummer = $startTagMonat->format("w");
+        switch($WochentagNummer){
+            case '2':
+                $monatsaufgaben[] = array('datum' => "", 'aufgaben' => []);
+                break;
+            case '3':
+                $monatsaufgaben[] = array('datum' => "", 'aufgaben' => []);
+                $monatsaufgaben[] = array('datum' => "", 'aufgaben' => []);
+                break;
+            case '4':
+                $monatsaufgaben[] = array('datum' => "", 'aufgaben' => []);
+                $monatsaufgaben[] = array('datum' => "", 'aufgaben' => []);
+                $monatsaufgaben[] = array('datum' => "", 'aufgaben' => []);
+                break;
+            case '5':
+                $monatsaufgaben[] = array('datum' => "", 'aufgaben' => []);
+                $monatsaufgaben[] = array('datum' => "", 'aufgaben' => []);
+                $monatsaufgaben[] = array('datum' => "", 'aufgaben' => []);
+                $monatsaufgaben[] = array('datum' => "", 'aufgaben' => []);
+                break;
+            case '6':
+                $monatsaufgaben[] = array('datum' => "", 'aufgaben' => []);
+                $monatsaufgaben[] = array('datum' => "", 'aufgaben' => []);
+                $monatsaufgaben[] = array('datum' => "", 'aufgaben' => []);
+                $monatsaufgaben[] = array('datum' => "", 'aufgaben' => []);
+                $monatsaufgaben[] = array('datum' => "", 'aufgaben' => []);
+                break;
+            case '0':
+                $monatsaufgaben[] = array('datum' => "", 'aufgaben' => []);
+                $monatsaufgaben[] = array('datum' => "", 'aufgaben' => []);
+                $monatsaufgaben[] = array('datum' => "", 'aufgaben' => []);
+                $monatsaufgaben[] = array('datum' => "", 'aufgaben' => []);
+                $monatsaufgaben[] = array('datum' => "", 'aufgaben' => []);
+                $monatsaufgaben[] = array('datum' => "", 'aufgaben' => []);
+                break;
+        }
+
+        for($i = 0; $i < $endday; $i++){
+            $aufgaben = getActiveTasksByDatumUndUser($startTagMonat->format("Y-m-d"), $userId);
+            $day = array('datum' => $startTagMonat->format("Y-m-d"), 'aufgaben' => $aufgaben);
+
+            $startTagMonat->modify('+1 day');
+            $monatsaufgaben[] = $day;
+        }
+        return $monatsaufgaben;
+    }
+
     function getActiveTasksByDatumUndUser($datum, $userId){
         $mysqli = dbConnect();
 
@@ -278,5 +348,37 @@
         $statement->close();
 
         return $aufgaben;
+    }
+
+    function getListeHaeufigkeit() {
+        $mysqli = dbConnect();
+
+        $result = $mysqli->query("SELECT id, name, days FROM lookuphaeufigkeit ORDER BY days LIMIT 20");
+        while($row = $result->fetch_assoc()){
+            $haeufigkeiten[] = $row;
+        }
+        return $haeufigkeiten;
+    }
+
+    function createNeueAufgabe($name, $haeufigkeit, $beschreibung, $score, $aufwand, $bild, $kategorie) {
+        $mysqli = dbConnect();
+
+        if($statement = $mysqli->prepare("INSERT INTO aufgaben (name, haeufigkeit, beschreibung, score, aufwand, bild, kategorie) VALUES (?, ?, ?, ?, ?, ?, ?)")){
+            $statement->bind_param("sisiiss", $name, $haeufigkeit, $beschreibung, $score, $aufwand, $bild, $kategorie);
+            $statement->execute();
+
+            $statement = $mysqli->prepare("SELECT id FROM aufgaben WHERE name = ? ORDER BY id DESC LIMIT 1");
+            $statement->bind_param("s",$name);
+
+            $statement->execute();
+            $statement->store_result();
+            $statement->bind_result($aufgabenId);
+            $statement->fetch();
+            
+            $statement->close();
+            return $aufgabenId;
+        } else {
+            return FALSE;
+        }
     }
 ?>

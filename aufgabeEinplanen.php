@@ -9,7 +9,12 @@ if (!isset($_SESSION['loggedin'])) {
 	exit;
 }
 
-if (!isset($_GET['userId']) || !isset($_GET['aufgabeId'])){
+if (!isset($_SESSION['userId'])) {
+    header('Location:login.php');
+    exit;
+}
+
+if (!isset($_GET['aufgabeId'])){
     header('Location:index.php');
 	exit;
 }
@@ -62,7 +67,7 @@ if (!isset($_GET['userId']) || !isset($_GET['aufgabeId'])){
                 </label>
                 <input type="number" name="repeat" placeholder="wie oft einplanen? (max. 10)" id="repeat" max=10 required>
                 <input type="hidden" id="aufgabenId" name="aufgabenId" value="<?=$aufgabe['id']?>">
-                <input type="hidden" id="userId" name="userId" value="<?=htmlspecialchars($_GET['userId'], ENT_QUOTES)?>">
+                <input type="hidden" id="userId" name="userId" value="<?=htmlspecialchars($_SESSION['userId'], ENT_QUOTES)?>">
                 <input type="submit" value="Einplanen">
             </form>
         </div>
