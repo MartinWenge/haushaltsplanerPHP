@@ -95,7 +95,6 @@
     -ms-transform: rotate(90deg);
     transform: rotate(90deg);
     transform-origin: left;
-    z-index: 0;
 }
 
 .container-navigation-kalender {

@@ -9,6 +9,7 @@ nav {
     top: 0;
     background-color: var(--accent-color);
     padding: 0px 20px 0px 20px;
+    z-index: 100;
 }
 
 nav .haushaltsplaner {
